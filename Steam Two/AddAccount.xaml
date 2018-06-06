@@ -1,0 +1,18 @@
+﻿<Controls:MetroWindow x:Name="AddAccount1" x:Class="SteamTwo.AddAccount"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SteamTwo"
+        mc:Ignorable="d"
+        Title="Steam Account" Height="151.747" Width="313.372" ResizeMode="NoResize">
+    <Grid>
+        <Button x:Name="button1" Content="Add Account" HorizontalAlignment="Left" Margin="13,82,0,0" VerticalAlignment="Top" Width="282" Click="button1_Click"/>
+        <TextBox x:Name="textbox1" HorizontalAlignment="Left" Height="23" Margin="73,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222"/>
+        <TextBlock HorizontalAlignment="Left" Margin="13,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58"><Run Text="Username"/><LineBreak/><Run/></TextBlock>
+        <TextBox x:Name="textbox2" HorizontalAlignment="Left" Height="23" Margin="73,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222"/>
+        <TextBlock HorizontalAlignment="Left" Margin="13,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58"><Run Text="Password"/><LineBreak/><Run/></TextBlock>
+
+    </Grid>
+</Controls:MetroWindow>
