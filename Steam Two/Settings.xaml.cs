@@ -21,6 +21,8 @@ namespace SteamTwo
 
         private void updateGUI()
         {
+            badAttempt.IsChecked = Properties.Settings.Default.badAttemptSetting;
+            multipleBots.IsChecked = Properties.Settings.Default.multipleBotSetting;
             copyPassword.IsChecked = Properties.Settings.Default.copyPasswordSetting;
             closeStemLaunch.IsChecked = Properties.Settings.Default.closeStemLaunchSetting;
             autoAddFriends.IsChecked = Properties.Settings.Default.autoAddFriend;
@@ -60,6 +62,8 @@ namespace SteamTwo
             {
                 Properties.Settings.Default.encrypted = (bool)enableEncryption.IsChecked;
             }
+            Properties.Settings.Default.badAttemptSetting = (bool)badAttempt.IsChecked;
+            Properties.Settings.Default.multipleBotSetting = (bool)multipleBots.IsChecked;
             Properties.Settings.Default.copyPasswordSetting = (bool)copyPassword.IsChecked;
             Properties.Settings.Default.closeStemLaunchSetting = (bool)closeStemLaunch.IsChecked;
             Properties.Settings.Default.chatComSettings = (bool)chatCommandButton.IsChecked;

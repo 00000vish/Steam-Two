@@ -110,12 +110,19 @@ namespace SteamTwo
                 }
                 else
                 {
-                    Properties.Settings.Default.encrypted = false;
-                    Properties.Settings.Default.encryptedKeyCheck = DEFUALT_KEY_TEST;
-                    Properties.Settings.Default.Save();
-                    encryptionKey = DEFUALT_KEY;
-                    File.Delete(SAVE_FILE_NAME);
-                    System.Windows.Forms.MessageBox.Show("Encryption key will reset back to defualt key and previous account details will be deleted.", "Encryption", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+                    if (Properties.Settings.Default.badAttemptSetting)
+                    {
+                        Properties.Settings.Default.encrypted = false;
+                        Properties.Settings.Default.encryptedKeyCheck = DEFUALT_KEY_TEST;
+                        Properties.Settings.Default.Save();
+                        encryptionKey = DEFUALT_KEY;
+                        File.Delete(SAVE_FILE_NAME);
+                        System.Windows.Forms.MessageBox.Show("Encryption key will reset back to defualt key and previous account details will be deleted.", "Encryption", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        Environment.Exit(0);
+                    }                 
                 }
             }
             else

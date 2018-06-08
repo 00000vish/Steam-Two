@@ -106,5 +106,29 @@ namespace SteamTwo.Properties {
                 this["copyPasswordSetting"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool multipleBotSetting {
+            get {
+                return ((bool)(this["multipleBotSetting"]));
+            }
+            set {
+                this["multipleBotSetting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool badAttemptSetting {
+            get {
+                return ((bool)(this["badAttemptSetting"]));
+            }
+            set {
+                this["badAttemptSetting"] = value;
+            }
+        }
     }
 }
