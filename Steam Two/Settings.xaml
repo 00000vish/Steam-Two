@@ -20,8 +20,8 @@
             <TabItem Header="Bot">
                 <Grid>
                     <CheckBox x:Name="autoAddFriends" Content="Auto Accept Friend Requests" HorizontalAlignment="Left" Margin="24,19,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
-                    <CheckBox x:Name="chatCommandButton" Content="Enable Chat Commands" HorizontalAlignment="Left" Margin="24,50,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
-                    <CheckBox x:Name="multipleBots" Content="Open Multiple Bots" HorizontalAlignment="Left" Margin="24,80,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="chatCommandButton" Content="Enable Chat Commands" HorizontalAlignment="Left" Margin="24,81,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="multipleBots" Content="Open Multiple Bots" HorizontalAlignment="Left" Margin="24,111,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Encryption">
@@ -32,7 +32,38 @@
             </TabItem>
             <TabItem x:Name="chatCommand" Header="Commands">
                 <Grid>
-                    <CheckBox Content="Enable Encryption" HorizontalAlignment="Left" Margin="20,19,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox Content="Quit Bot { !q }" HorizontalAlignment="Left" Margin="20,19,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox Content="Quit Bot { !q }" HorizontalAlignment="Left" Margin="20,48,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <TabControl HorizontalAlignment="Left" Height="393" Margin="16,10,0,0" VerticalAlignment="Top" Width="766" Controls:TabControlHelper.UnderlineBrush="{x:Null}" >
+            <TabItem Header="General">
+                <Grid>
+                    <CheckBox Content="Run in the background" HorizontalAlignment="Left" Margin="24,19,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="closeStemLaunch1" Content="Close after Steam luanch" HorizontalAlignment="Left" Margin="24,49,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="copyPassword1" Content="Double click to copy password" HorizontalAlignment="Left" Margin="24,79,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="badAttempt1" Content="Delete account.file and reset after 3 bad attempts" HorizontalAlignment="Left" Margin="24,108,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Bot">
+                <Grid>
+                    <CheckBox x:Name="autoAddFriends1" Content="Auto Accept Friend Requests" HorizontalAlignment="Left" Margin="24,19,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="chatCommandButton1" Content="Enable Chat Commands" HorizontalAlignment="Left" Margin="24,78,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="multipleBots1" Content="Open Multiple Bots" HorizontalAlignment="Left" Margin="24,107,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="autoAddFriends1_Copy" Content="Enable Chat" HorizontalAlignment="Left" Margin="24,48,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Encryption">
+                <Grid>
+                    <CheckBox x:Name="enableEncryption1" Content="Enable Encryption" HorizontalAlignment="Left" Margin="24,19,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <Button x:Name="changeKey1" Content="Change Encryption Key" HorizontalAlignment="Left" Margin="150,13,0,0" VerticalAlignment="Top" Width="165" Click="changeKey_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="chatCommand1" Header="Commands">
+                <Grid>
+                    <CheckBox Content="Quit Bot { !q }" HorizontalAlignment="Left" Margin="20,19,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox Content="Stop incoming chats { !sc }" HorizontalAlignment="Left" Margin="20,48,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                 </Grid>
             </TabItem>
         </TabControl>

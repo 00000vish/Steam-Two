@@ -1,0 +1,25 @@
+﻿<Window x:Class="SteamTwo.ToolKit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SteamTwo"
+        mc:Ignorable="d"
+        Title="ToolKit" Height="450" Width="435.507">
+    <Grid>
+        <ListView HorizontalAlignment="Left" Height="378" Margin="19,20,0,0" VerticalAlignment="Top" Width="272">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Games" HorizontalAlignment="Left" Margin="19,19,0,0" VerticalAlignment="Top" Width="272"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="378" Margin="19,20,0,0" VerticalAlignment="Top" Width="272"/>
+        <Button Content="Idle" HorizontalAlignment="Left" Margin="306,96,0,0" VerticalAlignment="Top" Width="107"/>
+        <Button Content="Achievements" HorizontalAlignment="Left" Margin="306,136,0,0" VerticalAlignment="Top" Width="107"/>
+        <Button Content="Store Page" HorizontalAlignment="Left" Margin="306,177,0,0" VerticalAlignment="Top" Width="107"/>
+        <Button Content="Launch" HorizontalAlignment="Left" Margin="306,54,0,0" VerticalAlignment="Top" Width="107"/>
+
+    </Grid>
+</Window>

@@ -104,6 +104,9 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="SteamBotController.cs" />
+    <Compile Include="ToolKit.xaml.cs">
+      <DependentUpon>ToolKit.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -130,6 +133,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToolKit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
