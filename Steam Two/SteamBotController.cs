@@ -10,20 +10,37 @@ namespace SteamTwo
 {
     static class SteamBotController
     {
-        static SteamClient steamClient;
-        static CallbackManager manager;
-        public static SteamUser steamUser;
-        static SteamFriends steamFriends;
-        static bool isRunning;
-        static string user, pass;
-        static string authCode, twoFactorAuth;
-
+        private static SteamUser steamUser;
+        private static SteamClient steamClient;
+        private static CallbackManager manager;
+        private static SteamFriends steamFriends;
+        private static bool isRunning;
+        private static string user, pass;
+        private static string authCode, twoFactorAuth;
+        private static Thread workThread = null;
 
         public static void steamLogin(String username, String password)
         {
-            // save our logon details
+            workThread = new Thread(steamLogin);
             user = username;
             pass = password;
+            workThread.Start();
+        }
+
+        public static void logBotIn()
+        {
+            workThread = new Thread(steamLogin);
+            workThread.Start();
+        }
+
+        public static void logBotOff()
+        {
+            steamUser.LogOff();
+            workThread.Abort();
+        }
+
+        private static void steamLogin()
+        {
 
             // create our steamclient instance
             var configuration = SteamConfiguration.Create(b => b.WithProtocolTypes(ProtocolTypes.Tcp));
@@ -126,17 +143,21 @@ namespace SteamTwo
 
                 if (is2FA)
                 {
-                    //Console.Write("Please enter your 2 factor auth code from your authenticator app: ");
-                    GetInput GI = new GetInput();
-                    twoFactorAuth = GI.Show("Authentication", "Please enter your 2 factor auth code from your authenticator app below",false);
-                    GI.Close();
+                    Application.Current.Dispatcher.Invoke((Action)delegate {
+                        //Console.Write("Please enter your 2 factor auth code from your authenticator app: ");
+                        GetInput GI = new GetInput();
+                        twoFactorAuth = GI.Show("Authentication", "Please enter your 2 factor auth code from your authenticator app below", false);
+                        GI.Close();
+                    });                   
                 }
                 else
                 {
-                    //Console.Write("Please enter the auth code sent to the email at {0}: ", callback.EmailDomain);
-                    GetInput GI = new GetInput();
-                    authCode = GI.Show("Authentication", "Please enter the auth code sent to the email at " + callback.EmailDomain,false);
-                    GI.Close();
+                    Application.Current.Dispatcher.Invoke((Action)delegate {
+                        //Console.Write("Please enter the auth code sent to the email at {0}: ", callback.EmailDomain);
+                        GetInput GI = new GetInput();
+                        authCode = GI.Show("Authentication", "Please enter the auth code sent to the email at " + callback.EmailDomain, false);
+                        GI.Close();
+                    });                    
                 }
 
                 return;

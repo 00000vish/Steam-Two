@@ -51,7 +51,7 @@
                     <CheckBox x:Name="autoAddFriends1" Content="Auto Accept Friend Requests" HorizontalAlignment="Left" Margin="24,19,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                     <CheckBox x:Name="chatCommandButton1" Content="Enable Chat Commands" HorizontalAlignment="Left" Margin="24,78,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                     <CheckBox x:Name="multipleBots1" Content="Open Multiple Bots" HorizontalAlignment="Left" Margin="24,107,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
-                    <CheckBox x:Name="autoAddFriends1_Copy" Content="Enable Chat" HorizontalAlignment="Left" Margin="24,48,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="enableChat" Content="Enable Chat" HorizontalAlignment="Left" Margin="24,48,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Encryption">

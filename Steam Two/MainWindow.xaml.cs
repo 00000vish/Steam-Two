@@ -180,7 +180,8 @@ namespace SteamTwo
         {
             if (listView1.SelectedItem != null)
             {
-                //login
+                BotMainWindow BMW = new BotMainWindow();                
+                BMW.Show(accountsArray[listView1.SelectedIndex].username, accountsArray[listView1.SelectedIndex].password);
             }
         }
 

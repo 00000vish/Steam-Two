@@ -17,7 +17,7 @@ namespace SteamTwo
     /// <summary>
     /// Interaction logic for ToolKit.xaml
     /// </summary>
-    public partial class ToolKit : Window
+    public partial class ToolKit
     {
         public ToolKit()
         {

@@ -1,12 +1,20 @@
-﻿<Window x:Class="SteamTwo.BotMainWindow"
+﻿<Controls:MetroWindow x:Class="SteamTwo.BotMainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamTwo"
         mc:Ignorable="d"
-        Title="BotMainWindow" Height="450" Width="800">
+        Title="Bot" Height="171.739" Width="302.899">
     <Grid>
-        
+        <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Margin="13,13,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2" Content="Chat : On" HorizontalAlignment="Left" Margin="13,39,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label3" Content="Chat Commands : Off" HorizontalAlignment="Left" Margin="13,65,0,0" VerticalAlignment="Top"/>
+        <Button Content="End Bot" HorizontalAlignment="Left" Margin="208,100,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="endBot1" Content="End Bot" HorizontalAlignment="Left" Margin="208,100,0,0" VerticalAlignment="Top" Width="75" Click="endBot1_Click"/>
+        <Button x:Name="logOut1" Content="Log Out" HorizontalAlignment="Left" Margin="13,100,0,0" VerticalAlignment="Top" Width="75" Click="logOut1_Click"/>
+        <Button x:Name="logIn1" Content="Log In" HorizontalAlignment="Left" Margin="93,100,0,0" VerticalAlignment="Top" Width="75" Click="logIn1_Click"/>
+
     </Grid>
-</Window>
+</Controls:MetroWindow>
