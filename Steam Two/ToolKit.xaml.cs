@@ -28,13 +28,27 @@ namespace SteamTwo
 
         private void backButton(object sender, RoutedEventArgs e)
         {
-            backHandle.Show();
+            if (settingButton.Content.ToString().Equals("Back to Main Page"))
+            {
+                backHandle.Show();                
+                settingButton.Content = "Hide Main Page";
+            }
+            else
+            {
+                backHandle.Hide();
+                settingButton.Content = "Back to Main Page";
+            }
         }
 
         public void Show(MainWindow backHandle)
         {
             this.backHandle = backHandle;
             Show();
+        }
+
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            backHandle.Show();
         }
     }
 }

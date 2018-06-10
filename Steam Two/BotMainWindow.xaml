@@ -6,10 +6,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamTwo"
         mc:Ignorable="d"
-        Title="Bot"  Height="454" Width="432.84" ResizeMode="CanMinimize" IsMaxRestoreButtonEnabled="False" ShowMaxRestoreButton="False">
+        Title="Bot"  Height="454" Width="432.84" ResizeMode="CanMinimize" IsMaxRestoreButtonEnabled="False" ShowMaxRestoreButton="False" Closing="MetroWindow_Closing">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button Content="Back to Main Page" Click="backButton"/>
+            <Button x:Name="settingButton" Content="Back to Main Page" Click="backButton"/>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Grid>
