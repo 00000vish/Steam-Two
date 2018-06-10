@@ -8,15 +8,19 @@ namespace SteamTwo
     /// </summary>
     public partial class BotMainWindow
     {
+
+        private MainWindow backHandle = null;
+
         public BotMainWindow()
         {
             InitializeComponent();
         }
 
-        public void Show(string username, string password)
+        public void Show(string username, string password, MainWindow backHandle)
         {
+            this.backHandle = backHandle;
             label1.Content = "Login into " + username;
-            label2.Content = "Chat On : " + Properties.Settings.Default.chatSetting;
+            openChat1.IsEnabled = Properties.Settings.Default.chatSetting;
             label3.Content = "Chat Commands On : " + Properties.Settings.Default.chatComSettings;
             SteamBotController.steamLogin(username, password);
             Show();
@@ -36,6 +40,11 @@ namespace SteamTwo
         {
             SteamBotController.logBotOff();
             Close();
+        }
+
+        private void backButton(object sender, RoutedEventArgs e)
+        {
+            backHandle.Show();
         }
     }
 }

@@ -7,6 +7,11 @@
         xmlns:local="clr-namespace:SteamTwo"
         mc:Ignorable="d"
         Title="ToolKit" Height="450" Width="435.507">
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="Back to Main Page" Click="backButton"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <ListView HorizontalAlignment="Left" Height="378" Margin="19,20,0,0" VerticalAlignment="Top" Width="272">
             <ListView.View>

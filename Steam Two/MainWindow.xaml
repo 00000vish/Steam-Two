@@ -28,10 +28,10 @@
         <Button Content="STEAM ACCOUNTS" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="259" Height="31" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="202,222.833,0,0" VerticalAlignment="Top" Width="60" FontSize="11" Click="addButton_Click" Grid.Row="1"/>
         <Button x:Name="removeButton" Content="Remove" HorizontalAlignment="Left" Margin="137,222.833,0,0" VerticalAlignment="Top" Width="60" FontSize="11" Click="removeButton_Click" Grid.Row="1"/>
-        <Button x:Name="openToolKit" Content="Open ToolKit" HorizontalAlignment="Left" Margin="10,264.833,0,0" VerticalAlignment="Top" Width="259" RenderTransformOrigin="0.087,0.402" Grid.Row="1" Click="loginBot1_Click"/>
+        <Button x:Name="openToolKit" Content="Open ToolKit" HorizontalAlignment="Left" Margin="10,264.833,0,0" VerticalAlignment="Top" Width="259" RenderTransformOrigin="0.087,0.402" Grid.Row="1" Click="openToolKit_Click"/>
         <Button x:Name="loginSteam1" Content="Login on Steam" HorizontalAlignment="Left" Margin="144,299,0,0" VerticalAlignment="Top" Width="122" RenderTransformOrigin="0.087,0.402" Grid.Row="1" Click="loginSteam1_Click"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="317" Margin="10,10,0,0" VerticalAlignment="Top" Width="259" Grid.RowSpan="2"/>
-        <Button x:Name="loginBot1_Copy" Content="Login on Bot" HorizontalAlignment="Left" Margin="10,299,0,0" VerticalAlignment="Top" Width="129" RenderTransformOrigin="0.087,0.402" Grid.Row="1" Click="loginBot1_Click"/>
+        <Button x:Name="loginBot1" Content="Login on Bot" HorizontalAlignment="Left" Margin="10,299,0,0" VerticalAlignment="Top" Width="129" RenderTransformOrigin="0.087,0.402" Grid.Row="1" Click="loginBot1_Click"/>
     </Grid>
 </Controls:MetroWindow>
     

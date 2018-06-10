@@ -6,15 +6,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamTwo"
         mc:Ignorable="d"
-        Title="Bot" Height="171.739" Width="302.899" ResizeMode="CanMinimize" IsMaxRestoreButtonEnabled="False" ShowMaxRestoreButton="False">
+        Title="Bot"  Height="454" Width="432.84" ResizeMode="CanMinimize" IsMaxRestoreButtonEnabled="False" ShowMaxRestoreButton="False">
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="Back to Main Page" Click="backButton"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
     <Grid>
+        <ListView HorizontalAlignment="Left" Height="293" Margin="16,77,0,0" VerticalAlignment="Top" Width="272">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Games" HorizontalAlignment="Left" Margin="16,48,0,0" VerticalAlignment="Top" Width="272"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="322" Margin="15,48,0,0" VerticalAlignment="Top" Width="273"/>
+
+
+        <Button Content="Idle" HorizontalAlignment="Left" Margin="306,120,0,0" VerticalAlignment="Top" Width="107"/>
+        <Button Content="Achievements" HorizontalAlignment="Left" Margin="306,160,0,0" VerticalAlignment="Top" Width="107"/>
+        <Button Content="Store Page" HorizontalAlignment="Left" Margin="306,201,0,0" VerticalAlignment="Top" Width="107"/>
+        <Button Content="Launch" HorizontalAlignment="Left" Margin="306,78,0,0" VerticalAlignment="Top" Width="107"/>
+
         <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Margin="13,13,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label2" Content="Chat : On" HorizontalAlignment="Left" Margin="13,39,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label3" Content="Chat Commands : Off" HorizontalAlignment="Left" Margin="13,65,0,0" VerticalAlignment="Top"/>
-        <Button Content="End Bot" HorizontalAlignment="Left" Margin="208,100,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="endBot1" Content="End Bot" HorizontalAlignment="Left" Margin="208,100,0,0" VerticalAlignment="Top" Width="75" Click="endBot1_Click"/>
-        <Button x:Name="logOut1" Content="Log Out" HorizontalAlignment="Left" Margin="13,100,0,0" VerticalAlignment="Top" Width="75" Click="logOut1_Click"/>
-        <Button x:Name="logIn1" Content="Log In" HorizontalAlignment="Left" Margin="93,100,0,0" VerticalAlignment="Top" Width="75" Click="logIn1_Click"/>
+        <Label x:Name="label3" Content="Chat Commands Off : False" HorizontalAlignment="Left" Margin="153,13,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="endBot1" Content="End Bot" HorizontalAlignment="Left" Margin="338,382,0,0" VerticalAlignment="Top" Width="75" Click="endBot1_Click"/>
+        <Button x:Name="logOut1" Content="Log Out" HorizontalAlignment="Left" Margin="15,382,0,0" VerticalAlignment="Top" Width="75" Click="logOut1_Click"/>
+        <Button x:Name="logIn1" Content="Log In" HorizontalAlignment="Left" Margin="95,382,0,0" VerticalAlignment="Top" Width="75" Click="logIn1_Click"/>
+        <Button Content="Launch" HorizontalAlignment="Left" Margin="306,78,0,0" VerticalAlignment="Top" Width="107"/>
+        <Button x:Name="openChat1" Content="Open Chat" HorizontalAlignment="Left" Margin="306,11,0,0" VerticalAlignment="Top" Width="107"/>
 
     </Grid>
 </Controls:MetroWindow>

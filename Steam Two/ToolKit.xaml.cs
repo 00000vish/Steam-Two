@@ -19,9 +19,22 @@ namespace SteamTwo
     /// </summary>
     public partial class ToolKit
     {
+        private MainWindow backHandle = null;
+
         public ToolKit()
         {
             InitializeComponent();
+        }
+
+        private void backButton(object sender, RoutedEventArgs e)
+        {
+            backHandle.Show();
+        }
+
+        public void Show(MainWindow backHandle)
+        {
+            this.backHandle = backHandle;
+            Show();
         }
     }
 }

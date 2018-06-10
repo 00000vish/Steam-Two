@@ -181,7 +181,8 @@ namespace SteamTwo
             if (listView1.SelectedItem != null)
             {
                 BotMainWindow BMW = new BotMainWindow();                
-                BMW.Show(accountsArray[listView1.SelectedIndex].username, accountsArray[listView1.SelectedIndex].password);
+                BMW.Show(accountsArray[listView1.SelectedIndex].username, accountsArray[listView1.SelectedIndex].password, this);
+                Hide();
             }
         }
 
@@ -219,6 +220,13 @@ namespace SteamTwo
                     Clipboard.SetText(accountsArray[listView1.SelectedIndex].password);
                 }
             }
+        }
+
+        private void openToolKit_Click(object sender, RoutedEventArgs e)
+        {
+            ToolKit TK = new ToolKit();
+            TK.Show(this);
+            Hide();
         }
     }
 }
