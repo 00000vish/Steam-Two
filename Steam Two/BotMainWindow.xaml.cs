@@ -16,6 +16,8 @@ namespace SteamTwo
         public void Show(string username, string password)
         {
             label1.Content = "Login into " + username;
+            label2.Content = "Chat On : " + Properties.Settings.Default.chatSetting;
+            label3.Content = "Chat Commands On : " + Properties.Settings.Default.chatComSettings;
             SteamBotController.steamLogin(username, password);
             Show();
         }

@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamTwo"
         mc:Ignorable="d"
-        Title="Bot" Height="171.739" Width="302.899">
+        Title="Bot" Height="171.739" Width="302.899" ResizeMode="CanMinimize" IsMaxRestoreButtonEnabled="False" ShowMaxRestoreButton="False">
     <Grid>
         <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Margin="13,13,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label2" Content="Chat : On" HorizontalAlignment="Left" Margin="13,39,0,0" VerticalAlignment="Top"/>

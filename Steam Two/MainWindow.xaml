@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SteamTwo"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Name="MainWindow1"  x:Class="SteamTwo.MainWindow"
         mc:Ignorable="d"
-        Title="Steam Two" Height="443.218" Width="282.051" ResizeMode="NoResize" Icon="side.ico" TitleCaps="False">
+        Title="Steam Two" Height="443.218" Width="282.051" ResizeMode="CanMinimize" Icon="side.ico" TitleCaps="False">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="settings" Click="settingTitleBarButton"/>

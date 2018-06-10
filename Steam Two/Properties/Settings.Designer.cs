@@ -130,5 +130,17 @@ namespace SteamTwo.Properties {
                 this["badAttemptSetting"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chatSetting {
+            get {
+                return ((bool)(this["chatSetting"]));
+            }
+            set {
+                this["chatSetting"] = value;
+            }
+        }
     }
 }
