@@ -27,16 +27,9 @@ namespace SteamTwo
             initLogics();
         }
 
-        internal static void setEncryptionKey(string temp)
-        {
-            encryptionKey = temp;
-            Properties.Settings.Default.encryptedKeySetting = SteamTwo.Cryptography.Encrypt(DEFUALT_KEY, encryptionKey);
-            Properties.Settings.Default.Save();
-        }
-
         private void initVariables()
         {
-            encrypted = Properties.Settings.Default.encryptedSetting;
+            encrypted = SteamTwoProperties.jsonSetting.encryptedSetting;
         }
 
         private void initLogics()
@@ -54,6 +47,13 @@ namespace SteamTwo
                 }
                 updateAccountList();
             }
+        }
+
+        internal static void setEncryptionKey(string temp)
+        {
+            encryptionKey = temp;
+            SteamTwoProperties.jsonSetting.encryptedKeySetting = SteamTwo.Cryptography.Encrypt(DEFUALT_KEY, encryptionKey);
+            Properties.Settings.Default.Save();
         }
 
         private void updateAccountList()
@@ -97,7 +97,7 @@ namespace SteamTwo
                     GetInput GI = new GetInput();
                     String temp = GI.Show("Encryption", discriptionText, true);
                     GI.Close();
-                    if (temp != "-1" && SteamTwo.Cryptography.Encrypt(DEFUALT_KEY, temp).Equals(Properties.Settings.Default.encryptedKeySetting))
+                    if (temp != "-1" && SteamTwo.Cryptography.Encrypt(DEFUALT_KEY, temp).Equals(SteamTwoProperties.jsonSetting.encryptedKeySetting))
                     {
                         encryptionKey = temp;
                     }
@@ -110,10 +110,10 @@ namespace SteamTwo
                 }
                 else
                 {
-                    if (Properties.Settings.Default.badAttemptSetting)
+                    if (SteamTwoProperties.jsonSetting.badAttemptSetting)
                     {
-                        Properties.Settings.Default.encryptedSetting = false;
-                        Properties.Settings.Default.encryptedKeySetting = DEFUALT_KEY_TEST;
+                        SteamTwoProperties.jsonSetting.encryptedSetting = false;
+                        SteamTwoProperties.jsonSetting.encryptedKeySetting = DEFUALT_KEY_TEST;
                         Properties.Settings.Default.Save();
                         encryptionKey = DEFUALT_KEY;
                         File.Delete(SAVE_FILE_NAME);
@@ -192,7 +192,7 @@ namespace SteamTwo
             {
                 LocalSteamController.startSteam(accountsArray[listView1.SelectedIndex].username, accountsArray[listView1.SelectedIndex].password);
             }
-            if (Properties.Settings.Default.closeStemLaunchSetting)
+            if (SteamTwoProperties.jsonSetting.closeStemLaunchSetting)
             {
                 beforeClosing();
             }
@@ -200,7 +200,7 @@ namespace SteamTwo
 
         private void beforeClosing()
         {
-            if (Properties.Settings.Default.alwayRunSetting)
+            if (SteamTwoProperties.jsonSetting.alwayRunSetting)
             {
                 Hide();
             }
@@ -213,7 +213,7 @@ namespace SteamTwo
 
         private void listView1_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (Properties.Settings.Default.copyPasswordSetting)
+            if (SteamTwoProperties.jsonSetting.copyPasswordSetting)
             {
                 if (listView1.SelectedItem != null)
                 {

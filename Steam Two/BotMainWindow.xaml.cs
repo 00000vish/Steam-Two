@@ -20,8 +20,8 @@ namespace SteamTwo
         {
             this.backHandle = backHandle;
             label1.Content = "Login into " + username;
-            openChat1.IsEnabled = Properties.Settings.Default.chatSetting;
-            label3.Content = "Chat Commands On : " + Properties.Settings.Default.chatComSetting;
+            openChat1.IsEnabled = SteamTwoProperties.jsonSetting.chatSetting;
+            label3.Content = "Chat Commands On : " + SteamTwoProperties.jsonSetting.chatComSetting;
             SteamBotController.steamLogin(username, password);
             Show();
         }
