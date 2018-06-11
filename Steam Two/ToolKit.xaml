@@ -6,10 +6,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamTwo"
         mc:Ignorable="d"
-        Title="ToolKit" Height="450" Width="435.507" Closing="MetroWindow_Closing">
+        Title="ToolKit" Height="450" Width="435.507">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button x:Name="settingButton" Content="Back to Main Page" Click="backButton"/>
+            <Button Content="Back to Main Page" Click="backButton"/>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Grid>

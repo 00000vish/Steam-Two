@@ -44,20 +44,6 @@ namespace SteamTwo
 
         private void backButton(object sender, RoutedEventArgs e)
         {
-            if (settingButton.Content.Equals("Back to Main Page"))
-            {
-                backHandle.Show();
-                settingButton.Content = "Hide Main Page";
-            }
-            else
-            {
-                backHandle.Hide();
-                settingButton.Content = "Back to Main Page";
-            }
-        }
-
-        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
             backHandle.Show();
         }
     }
