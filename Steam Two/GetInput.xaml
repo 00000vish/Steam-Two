@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamTwo"
         mc:Ignorable="d" Height="148.755" Width="439.701" ResizeMode="NoResize" Closing="GetInput1_Closing">
-    <Grid Height="106" VerticalAlignment="Top">
+    <Grid x:Name="zzzz" Height="106" VerticalAlignment="Top" FocusManager.FocusedElement="{Binding ElementName=PasswordBox1}">
         <Button Content="Ok" HorizontalAlignment="Left" Margin="348,78,0,0" VerticalAlignment="Top" Width="76" Height="26" Click="Button_Click"/>
         <TextBlock x:Name="label1" HorizontalAlignment="Left" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="414"/>
         <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="10,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="414" Text="" Background="White" KeyDown="textBox1_KeyDown"/>
