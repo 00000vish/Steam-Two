@@ -254,7 +254,7 @@ namespace SteamTwo
             }
 
             // we can also iterate over our friendslist to accept or decline any pending invites
-            if (Properties.Settings.Default.autoAddFriend)
+            if (Properties.Settings.Default.autoAddFriendSetting)
             {
                 foreach (var friend in callback.FriendList)
                 {

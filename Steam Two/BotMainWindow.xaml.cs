@@ -21,7 +21,7 @@ namespace SteamTwo
             this.backHandle = backHandle;
             label1.Content = "Login into " + username;
             openChat1.IsEnabled = Properties.Settings.Default.chatSetting;
-            label3.Content = "Chat Commands On : " + Properties.Settings.Default.chatComSettings;
+            label3.Content = "Chat Commands On : " + Properties.Settings.Default.chatComSetting;
             SteamBotController.steamLogin(username, password);
             Show();
         }
@@ -43,6 +43,20 @@ namespace SteamTwo
         }
 
         private void backButton(object sender, RoutedEventArgs e)
+        {
+            if (settingButton.Content.Equals("Back to Main Page"))
+            {
+                backHandle.Show();
+                settingButton.Content = "Hide Main Page";
+            }
+            else
+            {
+                backHandle.Hide();
+                settingButton.Content = "Back to Main Page";
+            }
+        }
+
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             backHandle.Show();
         }

@@ -2,16 +2,16 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SteamTwo.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="encrypted" Type="System.Boolean" Scope="User">
+    <Setting Name="encryptedSetting" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="autoAddFriend" Type="System.Boolean" Scope="User">
+    <Setting Name="autoAddFriendSetting" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="chatComSettings" Type="System.Boolean" Scope="User">
+    <Setting Name="chatComSetting" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="encryptedKeyCheck" Type="System.String" Scope="User">
+    <Setting Name="encryptedKeySetting" Type="System.String" Scope="User">
       <Value Profile="(Default)">FteUuLPNgH2K7YjGhHbPGw==</Value>
     </Setting>
     <Setting Name="closeStemLaunchSetting" Type="System.Boolean" Scope="User">
@@ -27,7 +27,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="badAttemptSetting" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="chatSetting" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

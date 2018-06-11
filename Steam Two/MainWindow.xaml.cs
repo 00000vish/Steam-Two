@@ -30,13 +30,13 @@ namespace SteamTwo
         internal static void setEncryptionKey(string temp)
         {
             encryptionKey = temp;
-            Properties.Settings.Default.encryptedKeyCheck = SteamTwo.Cryptography.Encrypt(DEFUALT_KEY, encryptionKey);
+            Properties.Settings.Default.encryptedKeySetting = SteamTwo.Cryptography.Encrypt(DEFUALT_KEY, encryptionKey);
             Properties.Settings.Default.Save();
         }
 
         private void initVariables()
         {
-            encrypted = Properties.Settings.Default.encrypted;
+            encrypted = Properties.Settings.Default.encryptedSetting;
         }
 
         private void initLogics()
@@ -97,7 +97,7 @@ namespace SteamTwo
                     GetInput GI = new GetInput();
                     String temp = GI.Show("Encryption", discriptionText, true);
                     GI.Close();
-                    if (temp != "-1" && SteamTwo.Cryptography.Encrypt(DEFUALT_KEY, temp).Equals(Properties.Settings.Default.encryptedKeyCheck))
+                    if (temp != "-1" && SteamTwo.Cryptography.Encrypt(DEFUALT_KEY, temp).Equals(Properties.Settings.Default.encryptedKeySetting))
                     {
                         encryptionKey = temp;
                     }
@@ -112,8 +112,8 @@ namespace SteamTwo
                 {
                     if (Properties.Settings.Default.badAttemptSetting)
                     {
-                        Properties.Settings.Default.encrypted = false;
-                        Properties.Settings.Default.encryptedKeyCheck = DEFUALT_KEY_TEST;
+                        Properties.Settings.Default.encryptedSetting = false;
+                        Properties.Settings.Default.encryptedKeySetting = DEFUALT_KEY_TEST;
                         Properties.Settings.Default.Save();
                         encryptionKey = DEFUALT_KEY;
                         File.Delete(SAVE_FILE_NAME);

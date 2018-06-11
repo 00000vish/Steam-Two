@@ -26,48 +26,48 @@ namespace SteamTwo.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool encrypted {
+        public bool encryptedSetting {
             get {
-                return ((bool)(this["encrypted"]));
+                return ((bool)(this["encryptedSetting"]));
             }
             set {
-                this["encrypted"] = value;
+                this["encryptedSetting"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool autoAddFriend {
+        public bool autoAddFriendSetting {
             get {
-                return ((bool)(this["autoAddFriend"]));
+                return ((bool)(this["autoAddFriendSetting"]));
             }
             set {
-                this["autoAddFriend"] = value;
+                this["autoAddFriendSetting"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool chatComSettings {
+        public bool chatComSetting {
             get {
-                return ((bool)(this["chatComSettings"]));
+                return ((bool)(this["chatComSetting"]));
             }
             set {
-                this["chatComSettings"] = value;
+                this["chatComSetting"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("FteUuLPNgH2K7YjGhHbPGw==")]
-        public string encryptedKeyCheck {
+        public string encryptedKeySetting {
             get {
-                return ((string)(this["encryptedKeyCheck"]));
+                return ((string)(this["encryptedKeySetting"]));
             }
             set {
-                this["encryptedKeyCheck"] = value;
+                this["encryptedKeySetting"] = value;
             }
         }
         
@@ -121,7 +121,7 @@ namespace SteamTwo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool badAttemptSetting {
             get {
                 return ((bool)(this["badAttemptSetting"]));
