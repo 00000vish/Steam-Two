@@ -1,4 +1,5 @@
-# Steam-Two >>WORKING PROGRESS<<
+# Steam-Two >>WORKING PROGRESS<< 
+# <<THESE ARE SUBJECTED TO CHANGE AND MORE TO COME >>
 
 
 ![App](https://imgur.com/jczl2qm.png)
