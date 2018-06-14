@@ -224,9 +224,9 @@ namespace SteamTwo
 
         private void openToolKit_Click(object sender, RoutedEventArgs e)
         {
-            ToolKit TK = new ToolKit();
-            TK.Show(this);
             Hide();
+            ToolKit TK = new ToolKit();
+            TK.Show(this);           
         }
     }
 }
