@@ -6,7 +6,7 @@
 
 ![App](https://imgur.com/p6VL05A.png)
 
-![App](https://imgur.com/pFL7DtC.png)
+![App](https://imgur.com/849wXQp.png)
 
 ![App](https://imgur.com/lw6emJt.png)
 
