@@ -22,10 +22,11 @@
         </ListView>
         <Button Content="Games" HorizontalAlignment="Left" Margin="19,19,0,0" VerticalAlignment="Top" Width="272"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="378" Margin="19,20,0,0" VerticalAlignment="Top" Width="272"/>
-        <Button Content="Idle" HorizontalAlignment="Left" Margin="306,96,0,0" VerticalAlignment="Top" Width="107"/>
-        <Button Content="Achievements" HorizontalAlignment="Left" Margin="306,136,0,0" VerticalAlignment="Top" Width="107"/>
-        <Button Content="Store Page" HorizontalAlignment="Left" Margin="306,177,0,0" VerticalAlignment="Top" Width="107"/>
-        <Button Content="Launch" HorizontalAlignment="Left" Margin="306,54,0,0" VerticalAlignment="Top" Width="107"/>
+        <Button x:Name="idle1" Content="Idle" HorizontalAlignment="Left" Margin="306,96,0,0" VerticalAlignment="Top" Width="107" Click="idle1_Click"/>
+        <Button x:Name="achievements1" Content="Achievements" HorizontalAlignment="Left" Margin="306,136,0,0" VerticalAlignment="Top" Width="107" Click="achievements1_Click"/>
+        <Button x:Name="storePage1" Content="Store Page" HorizontalAlignment="Left" Margin="306,177,0,0" VerticalAlignment="Top" Width="107" Click="storePage1_Click"/>
+        <Button x:Name="launch1" Content="Launch" HorizontalAlignment="Left" Margin="306,54,0,0" VerticalAlignment="Top" Width="107" Click="launch1_Click"/>
+        <Button x:Name="stopIdle1" Content="Stop Idle" HorizontalAlignment="Left" Margin="306,238,0,0" VerticalAlignment="Top" Width="107" Click="stopIdle1_Click"/>
 
     </Grid>
 </Controls:MetroWindow>

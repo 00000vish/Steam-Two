@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -21,10 +22,14 @@ namespace SteamTwo
     /// Interaction logic for ToolKit.xaml
     /// </summary>
     public partial class ToolKit
-    {       
-        private const String STEAM_GAME_CONTROLLER = "steamBoost\\steamGameControl.exe";  //https://github.com/vishwenga/Steam-Boost/tree/master/steamGameControl
-        private const String GAME_LIST_FILE = "steamBoost\\game-list.txt";
+    {
+        private const String STEAM_BOOST_DIRECTORY = "steamBoost\\";
+        private const String STEAM_GAME_CONTROLLER = STEAM_BOOST_DIRECTORY + "steamGameControl.exe";  //https://github.com/vishwenga/Steam-Boost/tree/master/steamGameControl
+        private const String GAME_LIST_FILE = STEAM_BOOST_DIRECTORY + "game-list.txt";
+        private const String SAM_GAME = STEAM_BOOST_DIRECTORY + "SAM.Game.exe";
         private MainWindow backHandle = null;
+
+        private ArrayList runningProc = new ArrayList();
 
         public ToolKit()
         {           
@@ -48,9 +53,10 @@ namespace SteamTwo
             {
                 System.Windows.Forms.MessageBox.Show("FILES MISSING  >>  download at \n https://github.com/vishwenga/Steam-Boost/."
                     + " \n\n\n MISSING FOLDER >> \n\n"
-                    + Environment.CurrentDirectory.ToString() + "\\steamBoost\\"
+                    + Environment.CurrentDirectory.ToString() + STEAM_BOOST_DIRECTORY
                     + " \n\n\n MISSING FILES IN FOLDER >> \n\n" 
-                    + Environment.CurrentDirectory.ToString() + "\\steamBoost\\steamGameControl.exe \n\n"
+                    + Environment.CurrentDirectory.ToString() + STEAM_GAME_CONTROLLER + "\n\n"
+                    + Environment.CurrentDirectory.ToString() + SAM_GAME + "\n\n"
                     + Environment.CurrentDirectory.ToString() + "\\steamBoost\\CSteamworks.dll \n\n"
                     + Environment.CurrentDirectory.ToString() + "\\steamBoost\\Newtonsoft.Json.dll \n\n"
                     + Environment.CurrentDirectory.ToString() + "\\steamBoost\\Newtonsoft.Json.xml \n\n"
@@ -109,7 +115,65 @@ namespace SteamTwo
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            killRunningProc();
             backHandle.Show();
+        }
+
+        private void storePage1_Click(object sender, RoutedEventArgs e)
+        {
+            if(listView1.SelectedItem != null)
+            {
+                ListViewItem item = new ListViewItem();
+                item = (ListViewItem)listView1.SelectedItem;
+                Process.Start("https://store.steampowered.com/app/" + item.Tag.ToString());
+            }
+        }
+
+        private void achievements1_Click(object sender, RoutedEventArgs e)
+        {
+            if (listView1.SelectedItem != null)
+            {
+                ListViewItem item = new ListViewItem();
+                item = (ListViewItem)listView1.SelectedItem;
+                Process.Start(new ProcessStartInfo(SAM_GAME, item.Tag.ToString()));
+            }
+        }
+
+        private void launch1_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if (listView1.SelectedItem != null)
+            {
+                ListViewItem item = new ListViewItem();
+                item = (ListViewItem)listView1.SelectedItem;
+                Process.Start("steam://rungameid/" + item.Tag.ToString());
+                WindowState = WindowState.Minimized;
+            }
+        }
+
+        private void idle1_Click(object sender, RoutedEventArgs e)
+        {
+            if (listView1.SelectedItem != null)
+            {
+                ListViewItem item = new ListViewItem();
+                item = (ListViewItem)listView1.SelectedItem;
+                runningProc.Add(Process.Start(new ProcessStartInfo(STEAM_GAME_CONTROLLER, item.Tag.ToString()) { WindowStyle = ProcessWindowStyle.Hidden}));
+            }
+        }
+
+        private void stopIdle1_Click(object sender, RoutedEventArgs e)
+        {
+            killRunningProc();
+        }
+
+        private void killRunningProc()
+        {
+            if(runningProc.Count > 0)
+            foreach (var item in runningProc)
+            {
+                Process tempp = (Process)item;
+                tempp.Kill();
+            }
         }
     }
 }
