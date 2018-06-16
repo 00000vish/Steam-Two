@@ -5,17 +5,18 @@ using System.Windows;
 
 
 class SettingJson
-{   
-    public bool encryptedSetting { get; set; }   
-    public bool autoAddFriendSetting { get; set; }   
-    public bool chatComSetting { get; set; }   
-    public String encryptedKeySetting { get; set; }   
-    public bool closeStemLaunchSetting { get; set; }   
-    public bool alwayRunSetting { get; set; }   
-    public bool copyPasswordSetting { get; set; }   
+{
+    public bool encryptedSetting { get; set; }
+    public bool autoAddFriendSetting { get; set; }
+    public bool chatComSetting { get; set; }
+    public String encryptedKeySetting { get; set; }
+    public bool closeStemLaunchSetting { get; set; }
+    public bool alwayRunSetting { get; set; }
+    public bool copyPasswordSetting { get; set; }
     public bool multipleBotSetting { get; set; }
-    public bool badAttemptSetting { get; set; }   
+    public bool badAttemptSetting { get; set; }
     public bool chatSetting { get; set; }
+    public bool autoStartSetting { get; set; }
 }
 
 static class SteamTwoProperties
@@ -47,7 +48,8 @@ static class SteamTwoProperties
 
     public static void reset()
     {
-        jsonSetting = new SettingJson() {
+        jsonSetting = new SettingJson()
+        {
             encryptedSetting = false,
             autoAddFriendSetting = false,
             chatComSetting = false,
@@ -57,14 +59,15 @@ static class SteamTwoProperties
             copyPasswordSetting = false,
             multipleBotSetting = false,
             badAttemptSetting = true,
-            chatSetting = false
+            chatSetting = false,
+            autoStartSetting = false
         };
     }
 
     public static void updateSettingFile()
     {
         string json = JsonConvert.SerializeObject(jsonSetting);
-        System.IO.File.WriteAllText(SETTING_FILE, json);       
+        System.IO.File.WriteAllText(SETTING_FILE, json);
     }
 
     public static void readSettingFile()
@@ -81,7 +84,7 @@ namespace SteamTwo
     /// </summary>
     public partial class Settings
     {
-        
+
 
         public Settings()
         {
@@ -91,12 +94,12 @@ namespace SteamTwo
         public void Show(String ignore)
         {
             Show();
-            updateGUI();
-            
+            updateGUI();            
         }
 
         private void updateGUI()
         {
+            autoStart.IsChecked = SteamTwoProperties.jsonSetting.autoStartSetting;
             badAttempt.IsChecked = SteamTwoProperties.jsonSetting.badAttemptSetting;
             multipleBots.IsChecked = SteamTwoProperties.jsonSetting.multipleBotSetting;
             copyPassword.IsChecked = SteamTwoProperties.jsonSetting.copyPasswordSetting;
@@ -123,30 +126,79 @@ namespace SteamTwo
 
         }
 
+        private void createRegKey()
+        {
+            Microsoft.Win32.RegistryKey regKey = default(Microsoft.Win32.RegistryKey);
+            regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);           
+            try
+            {
+                string KeyName = "Steam Two";
+                string KeyValue = Environment.CurrentDirectory + "\\Steam Two.exe";
+                regKey.SetValue(KeyName, KeyValue, Microsoft.Win32.RegistryValueKind.String);
+            }
+            catch (Exception e) { System.Windows.Forms.MessageBox.Show(e.ToString()); }
+            Properties.Settings.Default.Save();
+            regKey.Close();
+        }
+
+        private void deleteRegKey()
+        {
+            Microsoft.Win32.RegistryKey regKey = default(Microsoft.Win32.RegistryKey);
+            regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            try
+            {
+                regKey.DeleteValue("Steam Two", true);
+            }
+            catch (Exception) { }
+            Properties.Settings.Default.Save();
+            regKey.Close();
+        }
+
         private void settingsChanged(object sender, RoutedEventArgs e)
         {
-            this.UpdateLayout();
-            SettingGrid.Items.Refresh();
-
+            //encryption
             if (SteamTwoProperties.jsonSetting.encryptedSetting == false)
             {
                 SteamTwoProperties.jsonSetting.encryptedSetting = (bool)enableEncryption.IsChecked;
                 if (SteamTwoProperties.jsonSetting.encryptedSetting == true)
                 {
                     changeKeyClicked();
-
                 }
             }
             else
             {
                 SteamTwoProperties.jsonSetting.encryptedSetting = (bool)enableEncryption.IsChecked;
             }
+
+            //auto start
+            if(SteamTwoProperties.jsonSetting.autoStartSetting == false)
+            {               
+                SteamTwoProperties.jsonSetting.autoStartSetting = (bool)autoStart.IsChecked;
+                if (SteamTwoProperties.jsonSetting.autoStartSetting == true)
+                {
+                    createRegKey();
+                }
+            }
+            else
+            {
+                SteamTwoProperties.jsonSetting.autoStartSetting = (bool)autoStart.IsChecked;
+                deleteRegKey();
+            }
+
+
             SteamTwoProperties.jsonSetting.badAttemptSetting = (bool)badAttempt.IsChecked;
             SteamTwoProperties.jsonSetting.multipleBotSetting = (bool)multipleBots.IsChecked;
             SteamTwoProperties.jsonSetting.copyPasswordSetting = (bool)copyPassword.IsChecked;
             SteamTwoProperties.jsonSetting.closeStemLaunchSetting = (bool)closeStemLaunch.IsChecked;
             SteamTwoProperties.jsonSetting.chatComSetting = (bool)chatCommandButton.IsChecked;
             SteamTwoProperties.jsonSetting.autoAddFriendSetting = (bool)autoAddFriends.IsChecked;
+            SteamTwoProperties.updateSettingFile();
+            updateGUI();
+        }
+
+        private void resetSettings_Click(object sender, RoutedEventArgs e)
+        {
+            SteamTwoProperties.reset();
             SteamTwoProperties.updateSettingFile();
             updateGUI();
         }
