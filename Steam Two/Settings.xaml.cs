@@ -72,8 +72,16 @@ static class SteamTwoProperties
 
     public static void readSettingFile()
     {
-        var JsonData = JsonConvert.DeserializeObject<SettingJson>(File.ReadAllText(SETTING_FILE));
-        jsonSetting = JsonData;
+        try
+        {
+            var JsonData = JsonConvert.DeserializeObject<SettingJson>(File.ReadAllText(SETTING_FILE));
+            jsonSetting = JsonData;
+        }
+        catch (Exception)
+        {
+            SteamTwoProperties.reset();
+            SteamTwoProperties.updateSettingFile();
+        }
     }
 }
 
