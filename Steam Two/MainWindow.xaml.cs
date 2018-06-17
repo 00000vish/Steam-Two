@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -20,6 +21,8 @@ namespace SteamTwo
         private static bool encrypted = false;
         private static String encryptionKey = DEFUALT_KEY;
 
+        public static bool LaunchedViaStartup = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -29,6 +32,7 @@ namespace SteamTwo
 
         private void initVariables()
         {
+            LaunchedViaStartup = Environment.GetCommandLineArgs() != null && Environment.GetCommandLineArgs().Any(arg => arg.Equals("startup", StringComparison.CurrentCultureIgnoreCase));
             encrypted = SteamTwoProperties.jsonSetting.encryptedSetting;
         }
 
@@ -46,7 +50,11 @@ namespace SteamTwo
                     System.Windows.Forms.MessageBox.Show("Error getting account information from the save file, if the file was encrypted with different password goto settings and change the password and restart the application", "Error Decrypting", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
                 }
                 updateAccountList();
-            }
+                if (SteamTwoProperties.jsonSetting.autoLoginSetting)
+                {
+                    autoLoginSteam(true);
+                }
+            }           
         }
 
         internal static void setEncryptionKey(string temp)
@@ -188,14 +196,7 @@ namespace SteamTwo
 
         private void loginSteam1_Click(object sender, RoutedEventArgs e)
         {
-            if (listView1.SelectedItem != null)
-            {
-                LocalSteamController.startSteam(accountsArray[listView1.SelectedIndex].username, accountsArray[listView1.SelectedIndex].password);
-            }
-            if (SteamTwoProperties.jsonSetting.closeStemLaunchSetting)
-            {
-                beforeClosing();
-            }
+            autoLoginSteam(false);
         }
 
         private void beforeClosing()
@@ -227,6 +228,26 @@ namespace SteamTwo
             Hide();
             ToolKit TK = new ToolKit();
             TK.Show(this);           
+        }
+
+        private void autoLoginSteam(bool auto)
+        {
+            if (auto && accountsArray.Length > 0 && LaunchedViaStartup)
+            {
+                LocalSteamController.startSteam(accountsArray[0].username, accountsArray[0].password);
+                if (SteamTwoProperties.jsonSetting.closeStemLaunchSetting)
+                {
+                    beforeClosing();
+                }
+            }
+            if (!auto && listView1.SelectedItem != null)
+            {
+                LocalSteamController.startSteam(accountsArray[listView1.SelectedIndex].username, accountsArray[listView1.SelectedIndex].password);
+                if (SteamTwoProperties.jsonSetting.closeStemLaunchSetting)
+                {
+                    beforeClosing();
+                }
+            }
         }
     }
 }

@@ -11,12 +11,12 @@
         <TabControl x:Name="SettingGrid" HorizontalAlignment="Left" Height="393" Margin="16,10,0,0" VerticalAlignment="Top" Width="766" Controls:TabControlHelper.UnderlineBrush="{x:Null}">
             <TabItem Header="General">
                 <Grid>
-                    <CheckBox x:Name="runBackground" Content="Run in the background" HorizontalAlignment="Left" Margin="24,19,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
-                    <CheckBox x:Name="closeStemLaunch" Content="Close after Steam luanch" HorizontalAlignment="Left" Margin="24,138,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
-                    <CheckBox x:Name="copyPassword" Content="Double click to copy password" HorizontalAlignment="Left" Margin="24,79,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
-                    <CheckBox x:Name="badAttempt" Content="Delete account.file and reset after 3 bad attempts" HorizontalAlignment="Left" Margin="24,108,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
-                    <CheckBox x:Name="autoStart" Content="Auto Start with windows" HorizontalAlignment="Left" Margin="24,49,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
-                    <Button x:Name="autoLogin" Content="Auto login on Steam" HorizontalAlignment="Left" VerticalAlignment="Top" Width="156" Margin="190,43,0,0"/>
+                    <CheckBox x:Name="runBackground" Content="Run in the background" HorizontalAlignment="Left" Margin="24,50,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="closeStemLaunch" Content="Close after Steam luanch" HorizontalAlignment="Left" Margin="24,171,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="copyPassword" Content="Double click to copy password" HorizontalAlignment="Left" Margin="24,112,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="badAttempt" Content="Delete account.file and reset after 3 bad attempts" HorizontalAlignment="Left" Margin="24,141,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="autoStart" Content="Auto Start with windows" HorizontalAlignment="Left" Margin="24,22,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="autoLogin" Content="Auto Login on steam with first account" HorizontalAlignment="Left" Margin="24,81,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Bot">

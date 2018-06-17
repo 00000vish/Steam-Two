@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 using System.Windows;
-
+using System.Windows.Controls;
 
 class SettingJson
 {
@@ -17,6 +17,7 @@ class SettingJson
     public bool badAttemptSetting { get; set; }
     public bool chatSetting { get; set; }
     public bool autoStartSetting { get; set; }
+    public bool autoLoginSetting { get; set; }
 }
 
 static class SteamTwoProperties
@@ -60,7 +61,8 @@ static class SteamTwoProperties
             multipleBotSetting = false,
             badAttemptSetting = true,
             chatSetting = false,
-            autoStartSetting = false
+            autoStartSetting = false,
+            autoLoginSetting = false
         };
     }
 
@@ -102,12 +104,13 @@ namespace SteamTwo
         public void Show(String ignore)
         {
             Show();
-            updateGUI();            
+            updateGUI();
         }
 
         private void updateGUI()
         {
             autoStart.IsChecked = SteamTwoProperties.jsonSetting.autoStartSetting;
+            autoLogin.IsChecked = SteamTwoProperties.jsonSetting.autoLoginSetting;
             badAttempt.IsChecked = SteamTwoProperties.jsonSetting.badAttemptSetting;
             multipleBots.IsChecked = SteamTwoProperties.jsonSetting.multipleBotSetting;
             copyPassword.IsChecked = SteamTwoProperties.jsonSetting.copyPasswordSetting;
@@ -137,7 +140,7 @@ namespace SteamTwo
         private void createRegKey()
         {
             Microsoft.Win32.RegistryKey regKey = default(Microsoft.Win32.RegistryKey);
-            regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);           
+            regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
             try
             {
                 string KeyName = "Steam Two";
@@ -164,36 +167,28 @@ namespace SteamTwo
 
         private void settingsChanged(object sender, RoutedEventArgs e)
         {
+
+            CheckBox item = (CheckBox)sender;
             //encryption
-            if (SteamTwoProperties.jsonSetting.encryptedSetting == false)
+
+            SteamTwoProperties.jsonSetting.encryptedSetting = (bool)enableEncryption.IsChecked;
+            if (SteamTwoProperties.jsonSetting.encryptedSetting == true && item.Name.ToString().Equals("enableEncryption"))
             {
-                SteamTwoProperties.jsonSetting.encryptedSetting = (bool)enableEncryption.IsChecked;
-                if (SteamTwoProperties.jsonSetting.encryptedSetting == true)
-                {
-                    changeKeyClicked();
-                }
-            }
-            else
-            {
-                SteamTwoProperties.jsonSetting.encryptedSetting = (bool)enableEncryption.IsChecked;
-            }
+                changeKeyClicked();
+            }           
 
             //auto start
-            if(SteamTwoProperties.jsonSetting.autoStartSetting == false)
-            {               
-                SteamTwoProperties.jsonSetting.autoStartSetting = (bool)autoStart.IsChecked;
-                if (SteamTwoProperties.jsonSetting.autoStartSetting == true)
-                {
-                    createRegKey();
-                }
-            }
-            else
+            SteamTwoProperties.jsonSetting.autoStartSetting = (bool)autoStart.IsChecked;
+            if (SteamTwoProperties.jsonSetting.autoStartSetting == true && item.Name.ToString().Equals("autoStart"))
             {
-                SteamTwoProperties.jsonSetting.autoStartSetting = (bool)autoStart.IsChecked;
+                createRegKey();
+            }
+            else if (SteamTwoProperties.jsonSetting.autoStartSetting != true && item.Name.ToString().Equals("autoStart"))
+            {
                 deleteRegKey();
             }
 
-
+            SteamTwoProperties.jsonSetting.autoLoginSetting = (bool)autoLogin.IsChecked;
             SteamTwoProperties.jsonSetting.badAttemptSetting = (bool)badAttempt.IsChecked;
             SteamTwoProperties.jsonSetting.multipleBotSetting = (bool)multipleBots.IsChecked;
             SteamTwoProperties.jsonSetting.copyPasswordSetting = (bool)copyPassword.IsChecked;
