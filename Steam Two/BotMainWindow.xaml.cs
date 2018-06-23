@@ -38,18 +38,15 @@ namespace SteamTwo
         {
             if (File.Exists(STEAM_GAME_CONTROLLER))
             {
-                if (File.Exists(GAME_LIST_FILE))
-                {
-                    getGamesFromFile();
-                }
-                else
+                if (!File.Exists(GAME_LIST_FILE))
                 {
                     do
                     {
-                        Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,new Action(delegate { }));
+                        Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate { }));
                     } while (!SteamBotController.loggedIn);
                     generateGames();
                 }
+                getGamesFromFile();              
             }
             else
             {

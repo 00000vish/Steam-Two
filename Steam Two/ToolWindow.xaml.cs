@@ -39,14 +39,11 @@ namespace SteamTwo
         {
             if (File.Exists(STEAM_GAME_CONTROLLER))
             {
-                if (File.Exists(GAME_LIST_FILE))
-                {
-                    getGamesFromFile();
-                }
-                else
+                if (!File.Exists(GAME_LIST_FILE))
                 {
                     generateGames();
-                }
+                }       
+                getGamesFromFile();
             }
             else
             {
