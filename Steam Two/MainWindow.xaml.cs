@@ -191,7 +191,7 @@ namespace SteamTwo
         {
             if (listView1.SelectedItem != null)
             {
-                mainWindowControl(true);
+                Hide();
                 BotMainWindow BMW = new BotMainWindow();                
                 BMW.Show(accountsArray[listView1.SelectedIndex].username, accountsArray[listView1.SelectedIndex].password, this);
             }
@@ -206,7 +206,7 @@ namespace SteamTwo
         {
             if (SteamTwoProperties.jsonSetting.alwayRunSetting)
             {
-                mainWindowControl(true);
+                Hide();
             }
             else
             {
@@ -228,7 +228,7 @@ namespace SteamTwo
 
         private void openToolKit_Click(object sender, RoutedEventArgs e)
         {
-            mainWindowControl(true);
+            Hide();
             ToolKit TK = new ToolKit();
             TK.Show(this);           
         }
@@ -251,21 +251,6 @@ namespace SteamTwo
                     beforeClosing();
                 }
             }
-        }
-        
-        public static void mainWindowControl(bool hide)
-        {
-            if (hide)
-            {
-                windowHidden = true;
-                currentHandle.Hide();
-            }
-            else
-            {
-                windowHidden = false;
-                currentHandle.Show();
-            }
-           
         }
     }
 }

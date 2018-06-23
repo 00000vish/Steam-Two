@@ -95,12 +95,12 @@ namespace SteamTwo
         {
             if (settingButton.Content.ToString().Equals("Back to Main Page"))
             {
-                MainWindow.mainWindowControl(false);
+                MainWindow.currentHandle.Show();
                 settingButton.Content = "Hide Main Page";
             }
             else
             {
-                MainWindow.mainWindowControl(true);
+                MainWindow.currentHandle.Hide();
                 settingButton.Content = "Back to Main Page";
             }
         }
@@ -114,7 +114,7 @@ namespace SteamTwo
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             killRunningProc();
-            MainWindow.mainWindowControl(false);
+            MainWindow.currentHandle.Show();
         }
 
         private void storePage1_Click(object sender, RoutedEventArgs e)

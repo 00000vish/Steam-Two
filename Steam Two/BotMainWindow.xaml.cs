@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace SteamTwo
 {
@@ -43,6 +44,10 @@ namespace SteamTwo
                 }
                 else
                 {
+                    do
+                    {
+                        Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,new Action(delegate { }));
+                    } while (!SteamBotController.loggedIn);
                     generateGames();
                 }
             }
@@ -67,7 +72,7 @@ namespace SteamTwo
 
         private void generateGames()
         {
-            Hide();
+            //Hide();
             try
             {               
                 Process.Start(new ProcessStartInfo(STEAM_GAME_CONTROLLER, "botgamelist " + SteamBotController.getSteamUserID()));
@@ -77,7 +82,7 @@ namespace SteamTwo
             {
                 Thread.Sleep(2000);
             } while (!File.Exists(GAME_LIST_FILE));
-            Show();
+            //Show();
         }
 
         private void getGamesFromFile()
@@ -109,19 +114,19 @@ namespace SteamTwo
         {
             if (settingButton.Content.Equals("Back to Main Page"))
             {
-                MainWindow.mainWindowControl(false);
+                MainWindow.currentHandle.Show();
                 settingButton.Content = "Hide Main Page";
             }
             else
             {
-                MainWindow.mainWindowControl(true);
+                MainWindow.currentHandle.Hide();
                 settingButton.Content = "Back to Main Page";
             }
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MainWindow.mainWindowControl(false);
+            MainWindow.currentHandle.Show();
         }
 
         private void storePage1_Click(object sender, RoutedEventArgs e)
@@ -165,11 +170,7 @@ namespace SteamTwo
                 return;
 
             _shown = true;            
-            SteamBotController.steamLogin(username, password);
-            do
-            {
-                Thread.Sleep(1000);
-            } while (!SteamBotController.isRunning);
+            SteamBotController.steamLogin(username, password);         
             initLogics();
         }
 

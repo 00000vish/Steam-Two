@@ -11,6 +11,7 @@ namespace SteamTwo
     static class SteamBotController
     {
         public static bool isRunning;
+        public static bool loggedIn = false;
         private static SteamUser steamUser;
         private static SteamClient steamClient;
         private static CallbackManager manager;
@@ -174,7 +175,7 @@ namespace SteamTwo
             }
 
             Console.WriteLine("Successfully logged on!");
-
+            loggedIn = true;
             // at this point, we'd be able to perform actions on Steam
         }
 
