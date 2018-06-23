@@ -10,11 +10,11 @@ namespace SteamTwo
 {
     static class SteamBotController
     {
+        public static bool isRunning;
         private static SteamUser steamUser;
         private static SteamClient steamClient;
         private static CallbackManager manager;
-        private static SteamFriends steamFriends;
-        private static bool isRunning;
+        private static SteamFriends steamFriends;        
         private static string user, pass;
         private static string authCode, twoFactorAuth;
         private static Thread workThread = null;
@@ -145,6 +145,7 @@ namespace SteamTwo
                 {
                     Application.Current.Dispatcher.Invoke((Action)delegate {
                         //Console.Write("Please enter your 2 factor auth code from your authenticator app: ");
+                       // MainWindow.currentHandle.Show();
                         GetInput GI = new GetInput();
                         twoFactorAuth = GI.Show("Authentication", "Please enter your 2 factor auth code from your authenticator app below", false);
                         GI.Close();
@@ -154,6 +155,7 @@ namespace SteamTwo
                 {
                     Application.Current.Dispatcher.Invoke((Action)delegate {
                         //Console.Write("Please enter the auth code sent to the email at {0}: ", callback.EmailDomain);
+                        //MainWindow.currentHandle.Show();
                         GetInput GI = new GetInput();
                         authCode = GI.Show("Authentication", "Please enter the auth code sent to the email at " + callback.EmailDomain, false);
                         GI.Close();
@@ -290,6 +292,15 @@ namespace SteamTwo
                 MessageBox.Show(callback.Message.ToString());
             }
 
+        }
+
+        public static String getSteamUserID()
+        {
+            if (steamUser != null)
+            {
+                return steamUser.SteamID.ConvertToUInt64().ToString();
+            }
+            return "";
         }
 
         public static void playGame(int gameID)

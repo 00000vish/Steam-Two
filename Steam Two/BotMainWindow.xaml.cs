@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,22 +17,20 @@ namespace SteamTwo
         private const String GAME_LIST_FILE = "bot-game-list.txt";
         private const String SAM_GAME = STEAM_BOOST_DIRECTORY + "SAM.Game.exe";
 
-        private MainWindow backHandle = null;
-
         public BotMainWindow()
         {
             InitializeComponent();
         }
 
-        public void Show(string username, string password, MainWindow backHandle)
+        string username, password;
+        public void Show(string username2, string password2, MainWindow backHandle)
         {
-            this.backHandle = backHandle;
+            this.username = username2;
+            this.password = password2;
+            Show();
             label1.Content = "Login into " + username;
             openChat1.IsEnabled = SteamTwoProperties.jsonSetting.chatSetting;
-            label3.Content = "Chat Commands On : " + SteamTwoProperties.jsonSetting.chatComSetting;
-            SteamBotController.steamLogin(username, password);
-            Show();
-            initLogics();
+            label3.Content = "Chat Commands On : " + SteamTwoProperties.jsonSetting.chatComSetting;             
         }
 
         private void initLogics()
@@ -68,12 +67,26 @@ namespace SteamTwo
 
         private void generateGames()
         {
-            throw new NotImplementedException();
+            Hide();
+            try
+            {               
+                Process.Start(new ProcessStartInfo(STEAM_GAME_CONTROLLER, "botgamelist " + SteamBotController.getSteamUserID()));
+            }
+            catch (Exception) { }           
+            do
+            {
+                Thread.Sleep(2000);
+            } while (!File.Exists(GAME_LIST_FILE));
+            Show();
         }
 
         private void getGamesFromFile()
         {
-            throw new NotImplementedException();
+            string[] gameList = System.IO.File.ReadAllLines(GAME_LIST_FILE);
+            foreach (string game in gameList)
+            {
+                listView1.Items.Add(new ListViewItem() { Content = game.Split('`')[1], Tag = game.Split('`')[0] });
+            }
         }
 
         private void logOut1_Click(object sender, RoutedEventArgs e)
@@ -96,19 +109,19 @@ namespace SteamTwo
         {
             if (settingButton.Content.Equals("Back to Main Page"))
             {
-                backHandle.Show();
+                MainWindow.mainWindowControl(false);
                 settingButton.Content = "Hide Main Page";
             }
             else
             {
-                backHandle.Hide();
+                MainWindow.mainWindowControl(true);
                 settingButton.Content = "Back to Main Page";
             }
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            backHandle.Show();
+            MainWindow.mainWindowControl(false);
         }
 
         private void storePage1_Click(object sender, RoutedEventArgs e)
@@ -141,6 +154,23 @@ namespace SteamTwo
                 Process.Start("steam://rungameid/" + item.Tag.ToString());
                 WindowState = WindowState.Minimized;
             }
+        }
+
+        bool _shown;
+        protected override void OnContentRendered(EventArgs e)
+        {
+            base.OnContentRendered(e);
+
+            if (_shown)
+                return;
+
+            _shown = true;            
+            SteamBotController.steamLogin(username, password);
+            do
+            {
+                Thread.Sleep(1000);
+            } while (!SteamBotController.isRunning);
+            initLogics();
         }
 
         private void idle1_Click(object sender, RoutedEventArgs e)

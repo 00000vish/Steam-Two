@@ -25,9 +25,8 @@ namespace SteamTwo
     {
         private const String STEAM_BOOST_DIRECTORY = "steamBoost\\";
         private const String STEAM_GAME_CONTROLLER = STEAM_BOOST_DIRECTORY + "steamGameControl.exe";  //https://github.com/vishwenga/Steam-Boost/tree/master/steamGameControl
-        private const String GAME_LIST_FILE = STEAM_BOOST_DIRECTORY + "game-list.txt";
+        private const String GAME_LIST_FILE = "game-list.txt";
         private const String SAM_GAME = STEAM_BOOST_DIRECTORY + "SAM.Game.exe";
-        private MainWindow backHandle = null;
 
         private ArrayList runningProc = new ArrayList();
 
@@ -96,19 +95,18 @@ namespace SteamTwo
         {
             if (settingButton.Content.ToString().Equals("Back to Main Page"))
             {
-                backHandle.Show();
+                MainWindow.mainWindowControl(false);
                 settingButton.Content = "Hide Main Page";
             }
             else
             {
-                backHandle.Hide();
+                MainWindow.mainWindowControl(true);
                 settingButton.Content = "Back to Main Page";
             }
         }
 
         public void Show(MainWindow backHandle)
         {
-            this.backHandle = backHandle;
             Show();
             initLogics();
         }
@@ -116,7 +114,7 @@ namespace SteamTwo
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             killRunningProc();
-            backHandle.Show();
+            MainWindow.mainWindowControl(false);
         }
 
         private void storePage1_Click(object sender, RoutedEventArgs e)

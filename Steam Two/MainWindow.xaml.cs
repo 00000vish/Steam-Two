@@ -22,6 +22,8 @@ namespace SteamTwo
         private static String encryptionKey = DEFUALT_KEY;
 
         public static bool LaunchedViaStartup = false;
+        public static bool windowHidden = false;
+        public static MainWindow currentHandle = null;
 
         public MainWindow()
         {
@@ -34,6 +36,7 @@ namespace SteamTwo
         {
             LaunchedViaStartup = Environment.GetCommandLineArgs() != null && Environment.GetCommandLineArgs().Any(arg => arg.Equals("startup", StringComparison.CurrentCultureIgnoreCase));
             encrypted = SteamTwoProperties.jsonSetting.encryptedSetting;
+            currentHandle = this;
         }
 
         private void initLogics()
@@ -188,9 +191,9 @@ namespace SteamTwo
         {
             if (listView1.SelectedItem != null)
             {
+                mainWindowControl(true);
                 BotMainWindow BMW = new BotMainWindow();                
                 BMW.Show(accountsArray[listView1.SelectedIndex].username, accountsArray[listView1.SelectedIndex].password, this);
-                Hide();
             }
         }
 
@@ -203,7 +206,7 @@ namespace SteamTwo
         {
             if (SteamTwoProperties.jsonSetting.alwayRunSetting)
             {
-                Hide();
+                mainWindowControl(true);
             }
             else
             {
@@ -225,7 +228,7 @@ namespace SteamTwo
 
         private void openToolKit_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
+            mainWindowControl(true);
             ToolKit TK = new ToolKit();
             TK.Show(this);           
         }
@@ -248,6 +251,21 @@ namespace SteamTwo
                     beforeClosing();
                 }
             }
+        }
+        
+        public static void mainWindowControl(bool hide)
+        {
+            if (hide)
+            {
+                windowHidden = true;
+                currentHandle.Hide();
+            }
+            else
+            {
+                windowHidden = false;
+                currentHandle.Show();
+            }
+           
         }
     }
 }
