@@ -11,6 +11,7 @@
         <TextBlock x:Name="label1" HorizontalAlignment="Left" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="414"/>
         <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="10,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="414" Text="" Background="White" KeyDown="textBox1_KeyDown"/>
         <PasswordBox x:Name="PasswordBox1" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="414" IsEnabled="False" Visibility="Hidden" KeyDown="PasswordBox1_KeyDown"/>
+        <Button x:Name="Cancel1" Content="Cancel" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="95" Height="26" Click="Cancel_Click" Visibility="Hidden" IsEnabled="False"/>
 
     </Grid>
 </Controls:MetroWindow>

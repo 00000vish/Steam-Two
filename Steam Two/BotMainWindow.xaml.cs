@@ -123,6 +123,7 @@ namespace SteamTwo
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            SteamBotController.logBotOff();
             MainWindow.currentHandle.Show();
         }
 
@@ -133,28 +134,6 @@ namespace SteamTwo
                 ListViewItem item = new ListViewItem();
                 item = (ListViewItem)listView1.SelectedItem;
                 Process.Start("https://store.steampowered.com/app/" + item.Tag.ToString());
-            }
-        }
-
-        private void achievements1_Click(object sender, RoutedEventArgs e)
-        {
-            if (listView1.SelectedItem != null)
-            {
-                ListViewItem item = new ListViewItem();
-                item = (ListViewItem)listView1.SelectedItem;
-                Process.Start(new ProcessStartInfo(SAM_GAME, item.Tag.ToString()));
-            }
-        }
-
-        private void launch1_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (listView1.SelectedItem != null)
-            {
-                ListViewItem item = new ListViewItem();
-                item = (ListViewItem)listView1.SelectedItem;
-                Process.Start("steam://rungameid/" + item.Tag.ToString());
-                WindowState = WindowState.Minimized;
             }
         }
 
@@ -171,9 +150,22 @@ namespace SteamTwo
             initLogics();
         }
 
+        private void openChat1_Click(object sender, RoutedEventArgs e)
+        {
+            steamChatWindow SCW = new steamChatWindow();
+            SCW.Show();
+        }
+
         private void idle1_Click(object sender, RoutedEventArgs e)
         {
-
+            if (listView1.SelectedItem != null)
+            {
+                ListViewItem item = new ListViewItem();
+                item = (ListViewItem)listView1.SelectedItem;
+                int temp;
+                int.TryParse(item.Tag.ToString(), out temp);
+                SteamBotController.playGame(temp);
+            }
         }
     }
 }

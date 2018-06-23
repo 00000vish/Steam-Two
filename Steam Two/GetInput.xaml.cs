@@ -22,6 +22,8 @@ namespace SteamTwo
             String key = "";
             if (password)
             {
+                Cancel1.IsEnabled = true;
+                Cancel1.Visibility = Visibility.Visible;
                 PasswordBox1.IsEnabled = true;
                 PasswordBox1.Visibility = Visibility.Visible;
                 textBox1.IsEnabled = false;
@@ -76,6 +78,11 @@ namespace SteamTwo
             {
                 givenInput = true;
             }
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

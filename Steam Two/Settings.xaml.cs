@@ -109,6 +109,7 @@ namespace SteamTwo
 
         private void updateGUI()
         {
+            enableChat.IsChecked = SteamTwoProperties.jsonSetting.chatSetting;
             autoStart.IsChecked = SteamTwoProperties.jsonSetting.autoStartSetting;
             autoLogin.IsChecked = SteamTwoProperties.jsonSetting.autoLoginSetting;
             badAttempt.IsChecked = SteamTwoProperties.jsonSetting.badAttemptSetting;
@@ -194,6 +195,7 @@ namespace SteamTwo
             SteamTwoProperties.jsonSetting.copyPasswordSetting = (bool)copyPassword.IsChecked;
             SteamTwoProperties.jsonSetting.closeStemLaunchSetting = (bool)closeStemLaunch.IsChecked;
             SteamTwoProperties.jsonSetting.chatComSetting = (bool)chatCommandButton.IsChecked;
+            SteamTwoProperties.jsonSetting.chatSetting = (bool)enableChat.IsChecked;
             SteamTwoProperties.jsonSetting.autoAddFriendSetting = (bool)autoAddFriends.IsChecked;
             SteamTwoProperties.updateSettingFile();
             updateGUI();

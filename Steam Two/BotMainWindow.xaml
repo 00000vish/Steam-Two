@@ -24,19 +24,17 @@
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="322" Margin="15,48,0,0" VerticalAlignment="Top" Width="273"/>
 
 
-        <Button x:Name="idle1" Click="idle1_Click" Content="Idle" HorizontalAlignment="Left" Margin="306,120,0,0" VerticalAlignment="Top" Width="107"/>
-        <Button x:Name="achievements1" Click="achievements1_Click" Content="Achievements" HorizontalAlignment="Left" Margin="306,160,0,0" VerticalAlignment="Top" Width="107"/>
-        <Button x:Name="storePage1" Click="storePage1_Click" Content="Store Page" HorizontalAlignment="Left" Margin="306,201,0,0" VerticalAlignment="Top" Width="107"/>
-        <Button x:Name="launch1" Click="launch1_Click" Content="Launch" HorizontalAlignment="Left" Margin="306,78,0,0" VerticalAlignment="Top" Width="107"/>
-        
+        <Button x:Name="idle1" Click="idle1_Click" Content="Idle" HorizontalAlignment="Left" Margin="306,86,0,0" VerticalAlignment="Top" Width="107"/>
+        <Button x:Name="storePage1" Click="storePage1_Click" Content="Store Page" HorizontalAlignment="Left" Margin="306,123,0,0" VerticalAlignment="Top" Width="107"/>
+
 
         <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Margin="13,13,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label3" Content="Chat Commands Off : False" HorizontalAlignment="Left" Margin="153,13,0,0" VerticalAlignment="Top"/>
         <Button x:Name="endBot1" Content="End Bot" HorizontalAlignment="Left" Margin="338,382,0,0" VerticalAlignment="Top" Width="75" Click="endBot1_Click"/>
         <Button x:Name="logOut1" Content="Log Out" HorizontalAlignment="Left" Margin="15,382,0,0" VerticalAlignment="Top" Width="75" Click="logOut1_Click"/>
         <Button x:Name="logIn1" Content="Log In" HorizontalAlignment="Left" Margin="95,382,0,0" VerticalAlignment="Top" Width="75" Click="logIn1_Click"/>
-        
-        <Button x:Name="openChat1" Content="Open Chat" HorizontalAlignment="Left" Margin="306,11,0,0" VerticalAlignment="Top" Width="107"/>
+
+        <Button x:Name="openChat1" Content="Open Chat" HorizontalAlignment="Left" Margin="306,11,0,0" VerticalAlignment="Top" Width="107" Click="openChat1_Click"/>
 
     </Grid>
 </Controls:MetroWindow>
