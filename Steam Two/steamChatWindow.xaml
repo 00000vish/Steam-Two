@@ -6,21 +6,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamTwo"
         mc:Ignorable="d"
-        Title="steamChatWindow" Height="450" Width="800">
+        Title="steamChatWindow" Height="450" Width="800" Closing="MetroWindow_Closing" ResizeMode="NoResize">
     <Grid>
 
-        <TextBox HorizontalAlignment="Left" Margin="218,357,0,9" TextWrapping="Wrap" Text="TextBox" Width="564"/>
-
-        <ListView x:Name="listView2" HorizontalAlignment="Left" Height="346" Margin="218,11,0,0" VerticalAlignment="Top" Width="564">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Button Content="Send" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Margin="712,358,0,0" Height="51" Click="Button_Click"/>
 
 
-        <ListView x:Name="listView1" HorizontalAlignment="Left" Height="370" Margin="10,39,0,0" VerticalAlignment="Top" Width="196">
+
+
+
+
+        <TextBox x:Name="textbox1" HorizontalAlignment="Left" Margin="218,358,0,8" TextWrapping="Wrap" Width="494" KeyDown="textbox1_KeyDown"/>
+
+
+
+
+
+
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="399" Margin="218,11,0,0" VerticalAlignment="Top" Width="564">
+            <ListView  x:Name="chatLog1" Margin="0,0,0,52">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Border>
+
+
+
+
+
+
+        <ListView x:Name="friendsList1" HorizontalAlignment="Left" Height="370" Margin="10,39,0,0" VerticalAlignment="Top" Width="196">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -29,7 +47,5 @@
         </ListView>
         <Button Content="Friends" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Width="196"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="399" Margin="10,10,0,0" VerticalAlignment="Top" Width="196"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="399" Margin="218,11,0,0" VerticalAlignment="Top" Width="564"/>
-
     </Grid>
 </Controls:MetroWindow>

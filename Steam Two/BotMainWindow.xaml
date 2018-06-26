@@ -28,7 +28,7 @@
         <Button x:Name="storePage1" Click="storePage1_Click" Content="Store Page" HorizontalAlignment="Left" Margin="306,123,0,0" VerticalAlignment="Top" Width="107"/>
 
 
-        <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Margin="13,13,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="Logging in....." HorizontalAlignment="Left" Margin="13,13,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label3" Content="Chat Commands Off : False" HorizontalAlignment="Left" Margin="153,13,0,0" VerticalAlignment="Top"/>
         <Button x:Name="endBot1" Content="End Bot" HorizontalAlignment="Left" Margin="338,382,0,0" VerticalAlignment="Top" Width="75" Click="endBot1_Click"/>
         <Button x:Name="logOut1" Content="Log Out" HorizontalAlignment="Left" Margin="15,382,0,0" VerticalAlignment="Top" Width="75" Click="logOut1_Click"/>

@@ -57,7 +57,7 @@ namespace SteamTwo
                 {
                     autoLoginSteam(true);
                 }
-            }           
+            }
         }
 
         internal static void setEncryptionKey(string temp)
@@ -133,7 +133,7 @@ namespace SteamTwo
                     else
                     {
                         Environment.Exit(0);
-                    }                 
+                    }
                 }
             }
             else
@@ -192,7 +192,7 @@ namespace SteamTwo
             if (listView1.SelectedItem != null)
             {
                 Hide();
-                BotMainWindow BMW = new BotMainWindow();                
+                BotMainWindow BMW = new BotMainWindow();
                 BMW.Show(accountsArray[listView1.SelectedIndex].username, accountsArray[listView1.SelectedIndex].password, this);
             }
         }
@@ -230,7 +230,8 @@ namespace SteamTwo
         {
             Hide();
             ToolKit TK = new ToolKit();
-            TK.Show(this);           
+            TK.Show(this);
+
         }
 
         private void autoLoginSteam(bool auto)

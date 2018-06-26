@@ -15,20 +15,27 @@ namespace SteamTwo
     {
         private const String STEAM_BOOST_DIRECTORY = "steamBoost\\";
         private const String STEAM_GAME_CONTROLLER = STEAM_BOOST_DIRECTORY + "steamGameControl.exe";  //https://github.com/vishwenga/Steam-Boost/tree/master/steamGameControl
-        private const String GAME_LIST_FILE = "bot-game-list.txt";
         private const String SAM_GAME = STEAM_BOOST_DIRECTORY + "SAM.Game.exe";
+
+        private String gameListFile = "-game-list.txt";
 
         public BotMainWindow()
         {
             InitializeComponent();
         }
 
-        string username, password;
-        public void Show(string username2, string password2, MainWindow backHandle)
+        string username;
+        public void Show(string u, string p, MainWindow backHandle)
         {
-            this.username = username2;
-            this.password = password2;
+            this.username = u;
+            gameListFile = username + gameListFile;          
             Show();
+            do
+            {
+                Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate { }));
+            } while (!_shown && !SteamBotController.loggedIn);
+            SteamBotController.steamLogin(username, p);
+            initLogics();
             label1.Content = "Login into " + username;
             openChat1.IsEnabled = SteamTwoProperties.jsonSetting.chatSetting;
             label3.Content = "Chat Commands On : " + SteamTwoProperties.jsonSetting.chatComSetting;             
@@ -38,7 +45,7 @@ namespace SteamTwo
         {
             if (File.Exists(STEAM_GAME_CONTROLLER))
             {
-                if (!File.Exists(GAME_LIST_FILE))
+                if (!File.Exists(gameListFile))
                 {
                     do
                     {
@@ -72,19 +79,19 @@ namespace SteamTwo
             //Hide();
             try
             {               
-                Process.Start(new ProcessStartInfo(STEAM_GAME_CONTROLLER, "botgamelist " + SteamBotController.getSteamUserID()));
+                Process.Start(new ProcessStartInfo(STEAM_GAME_CONTROLLER, "botgamelist " + SteamBotController.getSteamUserID() + " " + username));
             }
             catch (Exception) { }           
             do
             {
                 Thread.Sleep(2000);
-            } while (!File.Exists(GAME_LIST_FILE));
+            } while (!File.Exists(gameListFile));
             //Show();
         }
 
         private void getGamesFromFile()
         {
-            string[] gameList = System.IO.File.ReadAllLines(GAME_LIST_FILE);
+            string[] gameList = System.IO.File.ReadAllLines(gameListFile);
             foreach (string game in gameList)
             {
                 listView1.Items.Add(new ListViewItem() { Content = game.Split('`')[1], Tag = game.Split('`')[0] });
@@ -144,10 +151,7 @@ namespace SteamTwo
 
             if (_shown)
                 return;
-
-            _shown = true;            
-            SteamBotController.steamLogin(username, password);         
-            initLogics();
+            _shown = true;                       
         }
 
         private void openChat1_Click(object sender, RoutedEventArgs e)
