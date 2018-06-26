@@ -377,9 +377,7 @@ namespace SteamTwo
         {
             if (callback.EntryType == EChatEntryType.ChatMsg)
             {
-                steamFriends.SendChatMessage(callback.Sender, EChatEntryType.ChatMsg, "hello");
                 fObject.updateChatLog(new Friend() { steamFrindsID =callback.Sender.ConvertToUInt64().ToString() }, callback.Message.ToString(), false);
-                MessageBox.Show(callback.Message.ToString());
             }
         }
 
@@ -392,7 +390,7 @@ namespace SteamTwo
             return "";
         }
 
-        public static void sendChatMessage(SteamID id, String msg )
+        public static void sendChatMessage(SteamID id, String msg)
         {
             fObject.updateChatLog(new Friend() { steamFrindsID = id.ConvertToUInt64().ToString()},msg,true);
             steamFriends.SendChatMessage(id , EChatEntryType.ChatMsg, msg);

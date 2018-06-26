@@ -86,9 +86,9 @@ namespace SteamTwo
         private void textbox1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key.ToString().Equals("Return"))
-            {
+            {               
+                setMessage();
                 textbox1.Text = "";
-                setMessage();                
             }            
         }
 
