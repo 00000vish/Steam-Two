@@ -31,12 +31,9 @@ namespace SteamTwo
             {
                 if (item.ProcessName.Equals("Steam") || item.ProcessName.Equals("GameOverlayUI"))
                 {
-                    if (item.Id != Process.GetCurrentProcess().Id)
-                    {
-                        item.Kill();
-                    }
+                    item.Kill();
                 }
-            }           
+            }
         }
     }
 }
