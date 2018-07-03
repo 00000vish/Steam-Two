@@ -9,6 +9,7 @@ namespace SteamTwo
         public static void startSteam(String username, String password)
         {
             killSteam();
+            System.Threading.Thread.Sleep(2000);
             Process proc = new Process
             {
                 StartInfo = new ProcessStartInfo
@@ -25,9 +26,17 @@ namespace SteamTwo
 
         public static void killSteam()
         {
-            Process.Start("taskkill", "/F /IM GameOverlayUI.exe");
-            Process.Start("taskkill", "/F /IM Steam.exe");
-            System.Threading.Thread.Sleep(2000);
+            Process[] proc = Process.GetProcesses();
+            foreach (Process item in proc)
+            {
+                if (item.ProcessName.Equals("Steam") || item.ProcessName.Equals("GameOverlayUI"))
+                {
+                    if (item.Id != Process.GetCurrentProcess().Id)
+                    {
+                        item.Kill();
+                    }
+                }
+            }           
         }
     }
 }
