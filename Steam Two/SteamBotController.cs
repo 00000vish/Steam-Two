@@ -376,7 +376,11 @@ namespace SteamTwo
         static void OnChatMessage(SteamFriends.FriendMsgCallback callback)
         {
             if (callback.EntryType == EChatEntryType.ChatMsg)
-            {
+            {             
+                if (SteamTwoProperties.jsonSetting.notifyOnMessage && steamChatWindow.current == null)
+                {
+                    System.Windows.Forms.MessageBox.Show("New Message!" , "Steam Two" , System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Information);
+                }
                 fObject.updateChatLog(new Friend() { steamFrindsID =callback.Sender.ConvertToUInt64().ToString() }, callback.Message.ToString(), false);
             }
         }

@@ -22,22 +22,27 @@ namespace SteamTwo
     public partial class steamChatWindow
     {
         private DispatcherTimer dispatcherTimer;
+        public static steamChatWindow current = null; 
+
 
         public steamChatWindow()
         {
             InitializeComponent();
+            current = this;
             dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += dispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
         }
 
+        //checks for chat message updates
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             updateFriendList();
             updateChatLog();
         }
 
+        //update friends list
         public void updateFriendList()
         {
             int temp = friendsList1.SelectedIndex;
@@ -51,6 +56,7 @@ namespace SteamTwo
             friendsList1.SelectedIndex = temp;
         }
 
+        //update chat
         public void updateChatLog()
         {
             chatLog1.Items.Clear();
@@ -75,7 +81,8 @@ namespace SteamTwo
             chatLog1.UpdateLayout();
         }
 
-        public void setMessage()
+        //sends message
+        public void sendMessage()
         {
             if (friendsList1.SelectedIndex != -1)
             {
@@ -83,26 +90,37 @@ namespace SteamTwo
             }
         }
 
+        //send message enter is pressed
         private void textbox1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key.ToString().Equals("Return"))
             {               
-                setMessage();
+                sendMessage();
                 textbox1.Text = "";
             }            
         }
 
+        //send button is clicked
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            setMessage();
+            sendMessage();
             textbox1.Text = "";
         }
 
+        //since wpf u cant check windows state, just to keep track is chat window is focused and its checked from steam bot thread
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            current = null;
+        }
 
+        private void MetroWindow_Deactivated(object sender, EventArgs e)
+        {
+            current = null;
+        }
+
+        private void MetroWindow_Activated(object sender, EventArgs e)
+        {
+            current = this;
         }
     }
 }
-
-//

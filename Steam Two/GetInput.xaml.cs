@@ -17,6 +17,8 @@ namespace SteamTwo
             InitializeComponent();
         }
 
+        //pass the title and discription and check if its asking for a password
+        //if its password input is hidden
         public String Show(String title, String discription, bool password)
         {
             String key = "";
@@ -54,16 +56,19 @@ namespace SteamTwo
             }
         }
 
+        //ok button is clicked
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             givenInput = true;
         }
 
+        //when the form is closing
         private void GetInput1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             givenInput = true;
         }
 
+        //enter is pressed
         private void textBox1_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key.ToString().Equals("Return"))
@@ -72,6 +77,7 @@ namespace SteamTwo
             }
         }
 
+        //enter is pressed
         private void PasswordBox1_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key.ToString().Equals("Return"))

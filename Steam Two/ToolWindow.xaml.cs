@@ -64,6 +64,7 @@ namespace SteamTwo
            
         }
 
+        //genereate game list file
         private void generateGames()
         {
             try
@@ -79,6 +80,7 @@ namespace SteamTwo
             Show();
         }
 
+        //read games from file
         private void getGamesFromFile()
         {
             string[] gameList = System.IO.File.ReadAllLines(GAME_LIST_FILE);
@@ -88,6 +90,7 @@ namespace SteamTwo
             }
         }
 
+        //back button
         private void backButton(object sender, RoutedEventArgs e)
         {
             if (settingButton.Content.ToString().Equals("Back to Main Page"))
@@ -108,12 +111,14 @@ namespace SteamTwo
             initLogics();
         }
 
+        //when form is closing
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             killRunningProc();
             MainWindow.currentHandle.Show();
         }
 
+        //store page is clicked
         private void storePage1_Click(object sender, RoutedEventArgs e)
         {
             if(listView1.SelectedItem != null)
@@ -124,6 +129,7 @@ namespace SteamTwo
             }
         }
 
+        //achievement is clicked
         private void achievements1_Click(object sender, RoutedEventArgs e)
         {
             if (listView1.SelectedItem != null)
@@ -134,6 +140,7 @@ namespace SteamTwo
             }
         }
 
+        //launch game is lcicked
         private void launch1_Click(object sender, RoutedEventArgs e)
         {
             
@@ -146,6 +153,7 @@ namespace SteamTwo
             }
         }
 
+        //idle is clicked
         private void idle1_Click(object sender, RoutedEventArgs e)
         {
             if (listView1.SelectedItem != null)
@@ -156,11 +164,13 @@ namespace SteamTwo
             }
         }
 
+        //stop idle clicked
         private void stopIdle1_Click(object sender, RoutedEventArgs e)
         {
             killRunningProc();
         }
 
+        //kill idle processed 
         private void killRunningProc()
         {
             if(runningProc.Count > 0)

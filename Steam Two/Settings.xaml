@@ -11,12 +11,11 @@
         <TabControl x:Name="SettingGrid" HorizontalAlignment="Left" Height="393" Margin="16,10,0,0" VerticalAlignment="Top" Width="766" Controls:TabControlHelper.UnderlineBrush="{x:Null}">
             <TabItem Header="General">
                 <Grid>
-                    <CheckBox x:Name="runBackground" Content="Run in the background" HorizontalAlignment="Left" Margin="24,50,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
-                    <CheckBox x:Name="closeStemLaunch" Content="Close after Steam luanch" HorizontalAlignment="Left" Margin="24,171,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
-                    <CheckBox x:Name="copyPassword" Content="Double click to copy password" HorizontalAlignment="Left" Margin="24,112,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
-                    <CheckBox x:Name="badAttempt" Content="Delete account.file and reset after 3 bad attempts" HorizontalAlignment="Left" Margin="24,141,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="closeStemLaunch" Content="Close after Steam luanch" HorizontalAlignment="Left" Margin="24,150,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="copyPassword" Content="Double click to copy password" HorizontalAlignment="Left" Margin="24,86,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="badAttempt" Content="Delete account.file and reset after 3 bad attempts" HorizontalAlignment="Left" Margin="24,119,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                     <CheckBox x:Name="autoStart" Content="Auto Start with windows" HorizontalAlignment="Left" Margin="24,22,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
-                    <CheckBox x:Name="autoLogin" Content="Auto Login on steam with first account" HorizontalAlignment="Left" Margin="24,81,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="autoLogin" Content="Auto Login on steam with first account" HorizontalAlignment="Left" Margin="24,54,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Bot">
@@ -25,6 +24,7 @@
                     <CheckBox x:Name="autoAddFriends" Content="Auto Accept Friend Requests" HorizontalAlignment="Left" Margin="24,19,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                     <CheckBox x:Name="chatCommandButton" Content="Enable Chat Commands" HorizontalAlignment="Left" Margin="24,78,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                     <CheckBox x:Name="multipleBots" Content="Open Multiple Bots" HorizontalAlignment="Left" Margin="24,108,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="notifyOnMessage" Content="Notify On Message" HorizontalAlignment="Left" Margin="24,141,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Encryption">

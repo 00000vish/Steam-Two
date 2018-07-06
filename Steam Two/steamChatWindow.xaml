@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamTwo"
         mc:Ignorable="d"
-        Title="steamChatWindow" Height="450" Width="800" Closing="MetroWindow_Closing" ResizeMode="NoResize">
+        Title="steamChatWindow" Height="450" Width="800" Closing="MetroWindow_Closing" ResizeMode="NoResize" Deactivated="MetroWindow_Deactivated" Activated="MetroWindow_Activated">
     <Grid>
 
         <Button Content="Send" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Margin="712,358,0,0" Height="51" Click="Button_Click"/>

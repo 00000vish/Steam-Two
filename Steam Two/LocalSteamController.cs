@@ -5,7 +5,7 @@ namespace SteamTwo
 {
     class LocalSteamController
     {
-
+        //starts steam
         public static void startSteam(String username, String password)
         {
             killSteam();
@@ -24,7 +24,8 @@ namespace SteamTwo
             proc.Start();
         }
 
-        public static void killSteam()
+        //kills steam
+        private  static void killSteam()
         {
             Process[] proc = Process.GetProcesses();
             foreach (Process item in proc)

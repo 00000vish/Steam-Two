@@ -11,13 +11,13 @@ class SettingJson
     public bool chatComSetting { get; set; }
     public String encryptedKeySetting { get; set; }
     public bool closeStemLaunchSetting { get; set; }
-    public bool alwayRunSetting { get; set; }
     public bool copyPasswordSetting { get; set; }
     public bool multipleBotSetting { get; set; }
     public bool badAttemptSetting { get; set; }
     public bool chatSetting { get; set; }
     public bool autoStartSetting { get; set; }
     public bool autoLoginSetting { get; set; }
+    public bool notifyOnMessage { get; set; }
 }
 
 static class SteamTwoProperties
@@ -25,6 +25,7 @@ static class SteamTwoProperties
     private const String SETTING_FILE = "SteamTwoSetting.config";
     public static SettingJson jsonSetting = null;
 
+    //init settings
     static SteamTwoProperties()
     {
         if (File.Exists(SETTING_FILE))
@@ -47,6 +48,7 @@ static class SteamTwoProperties
         }
     }
 
+    //reset resstings
     public static void reset()
     {
         jsonSetting = new SettingJson()
@@ -56,22 +58,24 @@ static class SteamTwoProperties
             chatComSetting = false,
             encryptedKeySetting = "FteUuLPNgH2K7YjGhHbPGw==",
             closeStemLaunchSetting = false,
-            alwayRunSetting = false,
             copyPasswordSetting = false,
             multipleBotSetting = false,
             badAttemptSetting = true,
             chatSetting = false,
             autoStartSetting = false,
-            autoLoginSetting = false
+            autoLoginSetting = false,
+            notifyOnMessage = false
         };
     }
 
+    //update seetting file
     public static void updateSettingFile()
     {
         string json = JsonConvert.SerializeObject(jsonSetting);
         System.IO.File.WriteAllText(SETTING_FILE, json);
     }
 
+    //read settings from setting files
     public static void readSettingFile()
     {
         try
@@ -107,6 +111,7 @@ namespace SteamTwo
             updateGUI();
         }
 
+        //updates gui according to currentsettings
         private void updateGUI()
         {
             enableChat.IsChecked = SteamTwoProperties.jsonSetting.chatSetting;
@@ -121,13 +126,16 @@ namespace SteamTwo
             changeKey.IsEnabled = SteamTwoProperties.jsonSetting.encryptedSetting;
             chatCommand.IsEnabled = SteamTwoProperties.jsonSetting.chatComSetting;
             chatCommandButton.IsChecked = SteamTwoProperties.jsonSetting.chatComSetting;
+            notifyOnMessage.IsChecked = SteamTwoProperties.jsonSetting.notifyOnMessage;
         }
 
+        //change passkey
         private void changeKey_Click(object sender, RoutedEventArgs e)
         {
             changeKeyClicked();
         }
 
+        //change pass key button pressed
         private void changeKeyClicked()
         {
             GetInput GI = new GetInput();
@@ -138,6 +146,7 @@ namespace SteamTwo
 
         }
 
+        //create registry key to auto start
         private void createRegKey()
         {
             Microsoft.Win32.RegistryKey regKey = default(Microsoft.Win32.RegistryKey);
@@ -153,6 +162,7 @@ namespace SteamTwo
             regKey.Close();
         }
 
+        //delete resitry auto start key
         private void deleteRegKey()
         {
             Microsoft.Win32.RegistryKey regKey = default(Microsoft.Win32.RegistryKey);
@@ -166,6 +176,7 @@ namespace SteamTwo
             regKey.Close();
         }
 
+        //when settings changed
         private void settingsChanged(object sender, RoutedEventArgs e)
         {
 
@@ -197,10 +208,12 @@ namespace SteamTwo
             SteamTwoProperties.jsonSetting.chatComSetting = (bool)chatCommandButton.IsChecked;
             SteamTwoProperties.jsonSetting.chatSetting = (bool)enableChat.IsChecked;
             SteamTwoProperties.jsonSetting.autoAddFriendSetting = (bool)autoAddFriends.IsChecked;
+            SteamTwoProperties.jsonSetting.notifyOnMessage = (bool)notifyOnMessage.IsChecked;
             SteamTwoProperties.updateSettingFile();
             updateGUI();
         }
 
+        //reset settings
         private void resetSettings_Click(object sender, RoutedEventArgs e)
         {
             SteamTwoProperties.reset();

@@ -39,6 +39,7 @@ namespace SteamTwo
             currentHandle = this;
         }
 
+        //ask password and decrypt passwords and displays
         private void initLogics()
         {
             setupEncryptionKey(0, "Please enter the encryption key below");
@@ -60,6 +61,7 @@ namespace SteamTwo
             }
         }
 
+        //set up encryption
         internal static void setEncryptionKey(string temp)
         {
             encryptionKey = temp;
@@ -67,6 +69,7 @@ namespace SteamTwo
             Properties.Settings.Default.Save();
         }
 
+        //update the account display list
         private void updateAccountList()
         {
             listView1.Items.Clear();
@@ -76,9 +79,9 @@ namespace SteamTwo
             }
         }
 
+        //read account information from file
         private void getAccountData()
         {
-
             var JsonAccounts = JsonConvert.DeserializeObject<jsonObject>(File.ReadAllText(SAVE_FILE_NAME));
             Account[] accArray = new Account[JsonAccounts.count];
             for (int i = 0; i < JsonAccounts.count; i++)
@@ -88,6 +91,7 @@ namespace SteamTwo
             accountsArray = accArray;
         }
 
+        //write account information to file
         internal static void writeAccountData()
         {
             Account[] accArray = new Account[accountsArray.Length];
@@ -99,6 +103,7 @@ namespace SteamTwo
             System.IO.File.WriteAllText(SAVE_FILE_NAME, json);
         }
 
+        //gets password and checks if its the right passwords
         private void setupEncryptionKey(int attempts, String discriptionText)
         {
             if (encrypted)
@@ -142,12 +147,14 @@ namespace SteamTwo
             }
         }
 
+        //open settings
         private void settingTitleBarButton(object sender, RoutedEventArgs e)
         {
             Settings SW = new Settings();
             SW.Show("zzz");
         }
 
+        //add account button
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
             AddAccount ASA = new AddAccount();
@@ -165,6 +172,7 @@ namespace SteamTwo
             listView1.SelectedIndex = 0;
         }
 
+        //remove accounnt button
         private void removeButton_Click(object sender, RoutedEventArgs e)
         {
             if (listView1.Items.Count > 0)
@@ -187,6 +195,7 @@ namespace SteamTwo
             }
         }
 
+        //login on bot
         private void loginBot1_Click(object sender, RoutedEventArgs e)
         {
             if (listView1.SelectedItem != null)
@@ -197,24 +206,20 @@ namespace SteamTwo
             }
         }
 
+        //login on steam
         private void loginSteam1_Click(object sender, RoutedEventArgs e)
         {
             autoLoginSteam(false);
         }
 
+        //before closing form
         private void beforeClosing()
         {
-            if (SteamTwoProperties.jsonSetting.alwayRunSetting)
-            {
-                Hide();
-            }
-            else
-            {
-                Properties.Settings.Default.Save();
-                System.Windows.Application.Current.Shutdown();
-            }
+            Properties.Settings.Default.Save();
+            System.Windows.Application.Current.Shutdown();
         }
 
+        //copy password
         private void listView1_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (SteamTwoProperties.jsonSetting.copyPasswordSetting)
@@ -226,6 +231,7 @@ namespace SteamTwo
             }
         }
 
+        //open tool kit button
         private void openToolKit_Click(object sender, RoutedEventArgs e)
         {
             Hide();
@@ -234,6 +240,7 @@ namespace SteamTwo
 
         }
 
+        //auto login
         private void autoLoginSteam(bool auto)
         {
             if (auto && accountsArray.Length > 0 && LaunchedViaStartup)
@@ -253,9 +260,16 @@ namespace SteamTwo
                 }
             }
         }
+
+        //windows is closing
+        private void MainWindow1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
     }
 }
 
+//to store json object
 public class jsonObject
 {
     //  {"count":1,"accounts":[{"username":"1234","password":"qwert"},{"username":"1234","password":"qwert"}]}
@@ -263,6 +277,7 @@ public class jsonObject
     public Account[] accounts { get; set; }
 }
 
+//to store account information
 public class Account
 {
     public String username { get; set; }

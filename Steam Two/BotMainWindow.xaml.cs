@@ -24,7 +24,7 @@ namespace SteamTwo
             InitializeComponent();
         }
 
-        string username;
+        string username; // log in on the bot with username and password
         public void Show(string u, string p, MainWindow backHandle)
         {
             this.username = u;
@@ -41,6 +41,7 @@ namespace SteamTwo
             label3.Content = "Chat Commands On : " + SteamTwoProperties.jsonSetting.chatComSetting;             
         }
 
+        //checks if the game file is there and reads it, if not found it open steam boost and generate game lsit
         private void initLogics()
         {
             if (File.Exists(STEAM_GAME_CONTROLLER))
@@ -74,9 +75,9 @@ namespace SteamTwo
 
         }
 
+        //generate games
         private void generateGames()
         {
-            //Hide();
             try
             {               
                 Process.Start(new ProcessStartInfo(STEAM_GAME_CONTROLLER, "botgamelist " + SteamBotController.getSteamUserID() + " " + username));
@@ -86,9 +87,9 @@ namespace SteamTwo
             {
                 Thread.Sleep(2000);
             } while (!File.Exists(gameListFile));
-            //Show();
         }
 
+        //gets game list from file
         private void getGamesFromFile()
         {
             string[] gameList = System.IO.File.ReadAllLines(gameListFile);
@@ -98,22 +99,26 @@ namespace SteamTwo
             }
         }
 
+        //log out is clicked
         private void logOut1_Click(object sender, RoutedEventArgs e)
         {
             SteamBotController.logBotOff();
         }
 
+        //log in is clicked
         private void logIn1_Click(object sender, RoutedEventArgs e)
         {
             SteamBotController.logBotIn();
         }
 
+        //end bot is clicked
         private void endBot1_Click(object sender, RoutedEventArgs e)
         {
             SteamBotController.logBotOff();
             Close();
         }
 
+        //back button
         private void backButton(object sender, RoutedEventArgs e)
         {
             if (settingButton.Content.Equals("Back to Main Page"))
@@ -128,6 +133,7 @@ namespace SteamTwo
             }
         }
 
+        //when bot window is closing
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             SteamBotController.logBotOff();
@@ -144,7 +150,7 @@ namespace SteamTwo
             }
         }
 
-        bool _shown;
+        bool _shown; //wiat form is shown
         protected override void OnContentRendered(EventArgs e)
         {
             base.OnContentRendered(e);
@@ -154,12 +160,14 @@ namespace SteamTwo
             _shown = true;                       
         }
 
+        //open button is clicked
         private void openChat1_Click(object sender, RoutedEventArgs e)
         {
             steamChatWindow SCW = new steamChatWindow();
             SCW.Show();
         }
 
+        //idle button is clicked
         private void idle1_Click(object sender, RoutedEventArgs e)
         {
             if (listView1.SelectedItem != null)
