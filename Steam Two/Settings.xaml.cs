@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -144,37 +145,7 @@ namespace SteamTwo
             MainWindow.setEncryptionKey(temp);
             MainWindow.writeAccountData();
 
-        }
-
-        //create registry key to auto start
-        private void createRegKey()
-        {
-            Microsoft.Win32.RegistryKey regKey = default(Microsoft.Win32.RegistryKey);
-            regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            try
-            {
-                string KeyName = "Steam Two";
-                string KeyValue = Environment.CurrentDirectory + "\\Steam Two.exe";
-                regKey.SetValue(KeyName, KeyValue, Microsoft.Win32.RegistryValueKind.String);
-            }
-            catch (Exception e) { System.Windows.Forms.MessageBox.Show(e.ToString()); }
-            Properties.Settings.Default.Save();
-            regKey.Close();
-        }
-
-        //delete resitry auto start key
-        private void deleteRegKey()
-        {
-            Microsoft.Win32.RegistryKey regKey = default(Microsoft.Win32.RegistryKey);
-            regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            try
-            {
-                regKey.DeleteValue("Steam Two", true);
-            }
-            catch (Exception) { }
-            Properties.Settings.Default.Save();
-            regKey.Close();
-        }
+        }     
 
         //when settings changed
         private void settingsChanged(object sender, RoutedEventArgs e)
@@ -211,6 +182,26 @@ namespace SteamTwo
             SteamTwoProperties.jsonSetting.notifyOnMessage = (bool)notifyOnMessage.IsChecked;
             SteamTwoProperties.updateSettingFile();
             updateGUI();
+        }
+
+        //open launcher and enabled auto start
+        private void createRegKey()
+        {
+            using (Process p = new Process())
+            {
+                p.StartInfo = new ProcessStartInfo { FileName = "\\SteamTwo Launcher.exe", Arguments = "on" };
+                p.Start();
+            }
+        }
+
+        //closes launcher and disable auto start
+        private void deleteRegKey()
+        {
+            using (Process p = new Process())
+            {
+                p.StartInfo = new ProcessStartInfo { FileName = "\\SteamTwo Launcher.exe", Arguments = "off" };
+                p.Start();
+            }
         }
 
         //reset settings

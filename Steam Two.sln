@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamTwo", "Steam Two\SteamTwo.csproj", "{DCC72F43-FFAE-4F1E-86DA-9D437BBCCFCB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamTwo Launcher", "SteamTwo Launcher\SteamTwo Launcher.csproj", "{86699279-DD50-46EA-A69E-53475E5B8E6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DCC72F43-FFAE-4F1E-86DA-9D437BBCCFCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCC72F43-FFAE-4F1E-86DA-9D437BBCCFCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCC72F43-FFAE-4F1E-86DA-9D437BBCCFCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86699279-DD50-46EA-A69E-53475E5B8E6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86699279-DD50-46EA-A69E-53475E5B8E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86699279-DD50-46EA-A69E-53475E5B8E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86699279-DD50-46EA-A69E-53475E5B8E6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
