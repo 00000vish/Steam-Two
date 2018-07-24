@@ -23,7 +23,13 @@ namespace SteamTwo_Launcher
 
         private static void checkArgs()
         {
-            String args = Environment.GetCommandLineArgs().ToString();
+            String args = "";
+            try
+            {
+                args = Environment.GetCommandLineArgs()[1];
+            }
+            catch (Exception) { }
+
             switch (args)
             {
                 case "on":
@@ -40,6 +46,7 @@ namespace SteamTwo_Launcher
 
         private static void deleteRegistryKey()
         {
+            MessageBox.Show("Test");
             Microsoft.Win32.RegistryKey regKey = default(Microsoft.Win32.RegistryKey);
             regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
             try
@@ -70,7 +77,7 @@ namespace SteamTwo_Launcher
         {
             using (Process p = new Process())
             {
-                p.StartInfo = new ProcessStartInfo { FileName = "\\Steam Two.exe", Arguments= "startup"};
+                p.StartInfo = new ProcessStartInfo { FileName = "Steam Two.exe", Arguments = "startup" };
                 p.Start();
             }
         }

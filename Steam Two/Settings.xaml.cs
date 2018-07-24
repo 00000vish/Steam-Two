@@ -189,7 +189,7 @@ namespace SteamTwo
         {
             using (Process p = new Process())
             {
-                p.StartInfo = new ProcessStartInfo { FileName = "\\SteamTwo Launcher.exe", Arguments = "on" };
+                p.StartInfo = new ProcessStartInfo { FileName = "SteamTwo Launcher.exe", Arguments = "on" };
                 p.Start();
             }
         }
@@ -199,7 +199,7 @@ namespace SteamTwo
         {
             using (Process p = new Process())
             {
-                p.StartInfo = new ProcessStartInfo { FileName = "\\SteamTwo Launcher.exe", Arguments = "off" };
+                p.StartInfo = new ProcessStartInfo { FileName = "SteamTwo Launcher.exe", Arguments = "off" };
                 p.Start();
             }
         }
