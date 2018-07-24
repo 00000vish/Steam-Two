@@ -46,7 +46,6 @@ namespace SteamTwo_Launcher
 
         private static void deleteRegistryKey()
         {
-            MessageBox.Show("Test");
             Microsoft.Win32.RegistryKey regKey = default(Microsoft.Win32.RegistryKey);
             regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
             try
