@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -223,13 +225,30 @@ namespace SteamTwo
 
         }
 
+        //opens Steam desktop Authenticator
+        private void openSteamDesktopAuthAsync()
+        {
+            if (!SteamTwoProperties.jsonSetting.SDALinkSetting.Equals(""))
+            {
+                string exepath = SteamTwoProperties.jsonSetting.SDALinkSetting;
+                ProcessStartInfo psi = new ProcessStartInfo();
+                psi.FileName = exepath;
+                psi.WorkingDirectory = Path.GetDirectoryName(exepath);
+                Process.Start(psi);
+            }           
+        }
+
         //auto login
         private void autoLoginSteam(bool auto)
         {
             if (auto && AccountController.userAccounts.Count > 0 && LaunchedViaStartup)
             {
                 UserAccount account = (UserAccount)AccountController.userAccounts[0];
-                LocalSteamController.startSteam(account.username, account.password);
+                LocalSteamController.startSteam(account.username, Cryptography.Decrypt(account.password, encryptionKey));
+                if (account.desktopAuth)
+                {
+                    openSteamDesktopAuthAsync();
+                }                
                 if (SteamTwoProperties.jsonSetting.closeStemLaunchSetting)
                 {
                     beforeClosing();
@@ -238,7 +257,11 @@ namespace SteamTwo
             if (!auto && listView1.SelectedItem != null)
             {
                 UserAccount account = (UserAccount)AccountController.userAccounts[listView1.SelectedIndex];
-                LocalSteamController.startSteam(account.username, account.password);
+                LocalSteamController.startSteam(account.username, Cryptography.Decrypt(account.password, encryptionKey));
+                if (account.desktopAuth)
+                {
+                    openSteamDesktopAuthAsync();
+                }
                 if (SteamTwoProperties.jsonSetting.closeStemLaunchSetting)
                 {
                     beforeClosing();
@@ -254,7 +277,11 @@ namespace SteamTwo
     }
 }
 
-//to store json object
+/// <summary>
+/// /////////////////////    JSON CLASSES BELOW
+/// </summary>
+
+    //to store json object
 public class jsonObject
 {
     //  {"count":1,"accounts":[{"username":"1234","password":"qwert"},{"username":"1234","password":"qwert"}]}

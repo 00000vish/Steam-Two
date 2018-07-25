@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamTwo"
         mc:Ignorable="d"
-        Title="Settings" Height="450" Width="800" ResizeMode="CanResizeWithGrip">
+        Title="Settings" Height="450" Width="800" ResizeMode="CanResizeWithGrip" Closing="Settings1_Closing">
     <Grid >
         <TabControl x:Name="SettingGrid" HorizontalAlignment="Left" Height="393" Margin="16,10,0,0" VerticalAlignment="Top" Width="766" Controls:TabControlHelper.UnderlineBrush="{x:Null}">
             <TabItem Header="General">
@@ -16,6 +16,8 @@
                     <CheckBox x:Name="badAttempt" Content="Delete account.file and reset after 3 bad attempts" HorizontalAlignment="Left" Margin="24,119,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                     <CheckBox x:Name="autoStart" Content="Auto Start with windows" HorizontalAlignment="Left" Margin="24,22,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                     <CheckBox x:Name="autoLogin" Content="Auto Login on steam with first account" HorizontalAlignment="Left" Margin="24,54,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <Label Content="Steam Desktop Authenticator" Margin="44,176,508,144"/>
+                    <Button x:Name="Link" Content="Link" HorizontalAlignment="Left" Margin="218,174,0,0" VerticalAlignment="Top" Width="78" Click="SDALink"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Bot">
@@ -40,6 +42,7 @@
                 </Grid>
             </TabItem>
             <Button Content="Button" Height="100" Width="75"/>
+
         </TabControl>
         <Button x:Name="resetSettings" Content="Reset Settings" HorizontalAlignment="Left" Margin="644,361,0,0" VerticalAlignment="Top" Width="111" Click="resetSettings_Click"/>
     </Grid>

@@ -295,7 +295,7 @@ namespace SteamTwo
         {
             if (callback.EntryType == EChatEntryType.ChatMsg)
             {             
-                if (SteamTwoProperties.jsonSetting.notifyOnMessage && steamChatWindow.current == null)
+                if (SteamTwoProperties.jsonSetting.notifyOnMessageSetting && steamChatWindow.current == null)
                 {
                     System.Windows.Forms.MessageBox.Show("New Message!" , "Steam Two" , System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Information);
                 }

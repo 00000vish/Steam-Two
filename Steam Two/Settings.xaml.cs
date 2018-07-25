@@ -18,7 +18,8 @@ class SettingJson
     public bool chatSetting { get; set; }
     public bool autoStartSetting { get; set; }
     public bool autoLoginSetting { get; set; }
-    public bool notifyOnMessage { get; set; }
+    public bool notifyOnMessageSetting { get; set; }
+    public String SDALinkSetting { get; set; }
 }
 
 static class SteamTwoProperties
@@ -65,7 +66,8 @@ static class SteamTwoProperties
             chatSetting = false,
             autoStartSetting = false,
             autoLoginSetting = false,
-            notifyOnMessage = false
+            notifyOnMessageSetting = false,
+            SDALinkSetting = ""
         };
     }
 
@@ -127,7 +129,15 @@ namespace SteamTwo
             changeKey.IsEnabled = SteamTwoProperties.jsonSetting.encryptedSetting;
             chatCommand.IsEnabled = SteamTwoProperties.jsonSetting.chatComSetting;
             chatCommandButton.IsChecked = SteamTwoProperties.jsonSetting.chatComSetting;
-            notifyOnMessage.IsChecked = SteamTwoProperties.jsonSetting.notifyOnMessage;
+            notifyOnMessage.IsChecked = SteamTwoProperties.jsonSetting.notifyOnMessageSetting;
+            if(SteamTwoProperties.jsonSetting.SDALinkSetting.Equals(""))
+            {
+                Link.Content = "Link";
+            }
+            else
+            {
+                Link.Content = "Linked";
+            }
         }
 
         //change passkey
@@ -179,7 +189,7 @@ namespace SteamTwo
             SteamTwoProperties.jsonSetting.chatComSetting = (bool)chatCommandButton.IsChecked;
             SteamTwoProperties.jsonSetting.chatSetting = (bool)enableChat.IsChecked;
             SteamTwoProperties.jsonSetting.autoAddFriendSetting = (bool)autoAddFriends.IsChecked;
-            SteamTwoProperties.jsonSetting.notifyOnMessage = (bool)notifyOnMessage.IsChecked;
+            SteamTwoProperties.jsonSetting.notifyOnMessageSetting = (bool)notifyOnMessage.IsChecked;
             SteamTwoProperties.updateSettingFile();
             updateGUI();
         }
@@ -210,6 +220,26 @@ namespace SteamTwo
             SteamTwoProperties.reset();
             SteamTwoProperties.updateSettingFile();
             updateGUI();
+        }
+
+        private void SDALink(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.OpenFileDialog fd = new System.Windows.Forms.OpenFileDialog();
+            if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                SteamTwoProperties.jsonSetting.SDALinkSetting = fd.FileName;
+            }
+            else
+            {
+                SteamTwoProperties.jsonSetting.SDALinkSetting = "";
+            }
+            SteamTwoProperties.updateSettingFile();
+            updateGUI();
+        }
+
+        private void Settings1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            SteamTwoProperties.updateSettingFile();
         }
     }
 }
