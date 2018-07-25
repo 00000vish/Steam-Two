@@ -16,13 +16,10 @@ namespace SteamTwo
         private const String DEFUALT_KEY_TEST = "FteUuLPNgH2K7YjGhHbPGw==";
         private const String SAVE_FILE_NAME = "accounts.file";
 
-        private static Account[] accountsArray = new Account[] { };
-
         private static bool encrypted = false;
         private static String encryptionKey = DEFUALT_KEY;
 
         public static bool LaunchedViaStartup = false;
-        public static bool windowHidden = false;
         public static MainWindow currentHandle = null;
 
         public MainWindow()
@@ -73,9 +70,9 @@ namespace SteamTwo
         private void updateAccountList()
         {
             listView1.Items.Clear();
-            for (int i = 0; i < accountsArray.Length; i++)
+            foreach (UserAccount item in AccountController.userAccounts)
             {
-                listView1.Items.Add(new ListViewItem { Content = accountsArray[i].username, Tag = i });
+                listView1.Items.Add(new ListViewItem { Content = item.username});
             }
         }
 
@@ -83,23 +80,23 @@ namespace SteamTwo
         private void getAccountData()
         {
             var JsonAccounts = JsonConvert.DeserializeObject<jsonObject>(File.ReadAllText(SAVE_FILE_NAME));
-            Account[] accArray = new Account[JsonAccounts.count];
             for (int i = 0; i < JsonAccounts.count; i++)
             {
-                accArray[i] = new Account { username = JsonAccounts.accounts[i].username, password = Cryptography.Decrypt(JsonAccounts.accounts[i].password, encryptionKey) };
+                AccountController.addAccount(JsonAccounts.accounts[i].username, JsonAccounts.accounts[i].password, false);
             }
-            accountsArray = accArray;
         }
 
         //write account information to file
         internal static void writeAccountData()
         {
-            Account[] accArray = new Account[accountsArray.Length];
-            for (int i = 0; i < accountsArray.Length; i++)
+            int index = 0;
+            Account[] accArray = new Account[AccountController.userAccounts.Count];
+            for (int i = 0; i < AccountController.userAccounts.Count; i++)
             {
-                accArray[i] = new Account { username = accountsArray[i].username, password = Cryptography.Encrypt(accountsArray[i].password, encryptionKey) };
+                UserAccount item = (UserAccount)AccountController.userAccounts[i];
+                accArray[index] = new Account { username = item.username, password = item.password ,  desktopAuth  = item.desktopAuth };
             }
-            string json = JsonConvert.SerializeObject(new jsonObject { count = accountsArray.Length, accounts = accArray });
+            string json = JsonConvert.SerializeObject(new jsonObject { count = accArray.Length, accounts = accArray });
             System.IO.File.WriteAllText(SAVE_FILE_NAME, json);
         }
 
@@ -158,15 +155,9 @@ namespace SteamTwo
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
             AddAccount ASA = new AddAccount();
-            String[] newItem = ASA.Show("lol");
+            String[] newAccount = ASA.Show("lol");
             ASA.Close();
-            Account[] accArray = new Account[accountsArray.Length + 1];
-            for (int i = 0; i < accountsArray.Length; i++)
-            {
-                accArray[i] = new Account { username = accountsArray[i].username, password = accountsArray[i].password };
-            }
-            accArray[accountsArray.Length] = new Account { username = newItem[0], password = newItem[1] };
-            accountsArray = accArray;
+            AccountController.addAccount(newAccount[0], Cryptography.Encrypt(newAccount[1], encryptionKey), bool.Parse(newAccount[2]));
             updateAccountList();
             writeAccountData();
             listView1.SelectedIndex = 0;
@@ -177,18 +168,8 @@ namespace SteamTwo
         {
             if (listView1.Items.Count > 0)
             {
-                int index = 0;
-                Account[] accArray = new Account[accountsArray.Length - 1];
-
-                foreach (var item in accountsArray)
-                {
-                    if (item != accountsArray[listView1.SelectedIndex])
-                    {
-                        accArray[index] = new Account { username = item.username, password = item.password };
-                        index++;
-                    }
-                }
-                accountsArray = accArray;
+                UserAccount account = (UserAccount)AccountController.userAccounts[listView1.SelectedIndex];
+                AccountController.removeAccount(account);
                 updateAccountList();
                 writeAccountData();
                 listView1.SelectedIndex = 0;
@@ -202,7 +183,8 @@ namespace SteamTwo
             {
                 Hide();
                 BotMainWindow BMW = new BotMainWindow();
-                BMW.Show(accountsArray[listView1.SelectedIndex].username, accountsArray[listView1.SelectedIndex].password, this);
+                UserAccount account = (UserAccount)AccountController.userAccounts[listView1.SelectedIndex];
+                BMW.Show(account.username, Cryptography.Decrypt(account.password, encryptionKey), this);
             }
         }
 
@@ -221,12 +203,13 @@ namespace SteamTwo
 
         //copy password
         private void listView1_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
+        {            
             if (SteamTwoProperties.jsonSetting.copyPasswordSetting)
             {
+                UserAccount account = (UserAccount)AccountController.userAccounts[listView1.SelectedIndex];
                 if (listView1.SelectedItem != null)
                 {
-                    Clipboard.SetText(accountsArray[listView1.SelectedIndex].password);
+                    Clipboard.SetText(Cryptography.Decrypt(account.password, encryptionKey));
                 }
             }
         }
@@ -243,9 +226,10 @@ namespace SteamTwo
         //auto login
         private void autoLoginSteam(bool auto)
         {
-            if (auto && accountsArray.Length > 0 && LaunchedViaStartup)
+            if (auto && AccountController.userAccounts.Count > 0 && LaunchedViaStartup)
             {
-                LocalSteamController.startSteam(accountsArray[0].username, accountsArray[0].password);
+                UserAccount account = (UserAccount)AccountController.userAccounts[0];
+                LocalSteamController.startSteam(account.username, account.password);
                 if (SteamTwoProperties.jsonSetting.closeStemLaunchSetting)
                 {
                     beforeClosing();
@@ -253,7 +237,8 @@ namespace SteamTwo
             }
             if (!auto && listView1.SelectedItem != null)
             {
-                LocalSteamController.startSteam(accountsArray[listView1.SelectedIndex].username, accountsArray[listView1.SelectedIndex].password);
+                UserAccount account = (UserAccount)AccountController.userAccounts[listView1.SelectedIndex];
+                LocalSteamController.startSteam(account.username, account.password);
                 if (SteamTwoProperties.jsonSetting.closeStemLaunchSetting)
                 {
                     beforeClosing();
@@ -282,4 +267,5 @@ public class Account
 {
     public String username { get; set; }
     public String password { get; set; }
+    public bool desktopAuth { get; set; }
 }

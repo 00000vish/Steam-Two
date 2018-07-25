@@ -6,13 +6,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamTwo"
         mc:Ignorable="d"
-        Title="Steam Account" Height="151.747" Width="313.372" ResizeMode="NoResize">
+        Title="Steam Account" Height="177.104" Width="313.372" ResizeMode="NoResize">
     <Grid>
-        <Button x:Name="button1" Content="Add Account" HorizontalAlignment="Left" Margin="13,82,0,0" VerticalAlignment="Top" Width="282" Click="button1_Click"/>
+        <Button x:Name="button1" Content="Add Account" HorizontalAlignment="Left" Margin="13,109,0,0" VerticalAlignment="Top" Width="282" Click="button1_Click"/>
         <TextBox x:Name="textbox1" HorizontalAlignment="Left" Height="23" Margin="73,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222"/>
         <TextBlock HorizontalAlignment="Left" Margin="13,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58"><Run Text="Username"/><LineBreak/><Run/></TextBlock>
         <TextBox x:Name="textbox2" HorizontalAlignment="Left" Height="23" Margin="73,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222"/>
         <TextBlock HorizontalAlignment="Left" Margin="13,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58"><Run Text="Password"/><LineBreak/><Run/></TextBlock>
+        <CheckBox x:Name="desktopAuth" Content="Desktop Authenticator Enabled " HorizontalAlignment="Left" Margin="13,80,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Controls:MetroWindow>

@@ -9,91 +9,10 @@ using SteamKit2.Internal;
 
 namespace SteamTwo
 {
-
-    class Friend
-    {
-        public String customName { get; set; }
-        public String steamFrindsID { get; set; }
-        public ArrayList chatLog { get; set; }
-        public SteamID SteamIDObject { get; set; }
-
-        public string getName()
-        {
-            return customName;
-        }
-
-        public void newMessage(String n, String msg)
-        {
-            chatLog.Add(n + ": " + msg);
-        }
-
-        public string getId()
-        {
-            return steamFrindsID;
-        }
-    }
-
-    class FriendsArray
-    {
-        ArrayList array = new ArrayList();       
-
-        public void Add(Friend item)
-        {
-            array.Add(item);
-        }
-
-        public void updateName(Friend input)
-        {
-            foreach (var item in array)
-            {
-
-                Friend temp = (Friend)item;
-                if (temp.steamFrindsID.Equals(input.steamFrindsID))
-                {
-                    temp.customName = input.customName;
-                   
-                }
-            }            
-        }
-
-        public void updateChatLog(Friend input, String mgs, bool outgoing)
-        {
-            foreach (var item in array)
-            {
-
-                Friend temp = (Friend)item;
-                if (temp.steamFrindsID.Equals(input.steamFrindsID))
-                {
-                    if (outgoing)
-                    {
-                        temp.newMessage("Me", mgs);
-                    }
-                    else
-                    {
-                        temp.newMessage(temp.customName, mgs);
-                    }
-                    
-                }
-            }            
-        }
-
-        public Friend get(int x)
-        {
-            return (Friend)array[x];
-        }
-
-        public ArrayList getArray()
-        {
-            return array;
-        }
-    }
-
-
     static class SteamBotController
     {
         public static bool isRunning;
         public static bool loggedIn = false;
-        public static FriendsArray fObject = null;
         private static SteamUser steamUser;
         private static SteamClient steamClient;
         private static CallbackManager manager;
@@ -103,8 +22,7 @@ namespace SteamTwo
         private static Thread workThread = null;
 
         public static void steamLogin(String username, String password)
-        {
-            fObject = new FriendsArray();
+        {           
             workThread = new Thread(steamLogin);
             user = username;
             pass = password;
@@ -338,7 +256,7 @@ namespace SteamTwo
                 SteamID steamIdFriend = steamFriends.GetFriendByIndex(x);
 
 
-                fObject.Add(new Friend() { steamFrindsID = "" + steamIdFriend.ConvertToUInt64().ToString(), chatLog = new ArrayList(), SteamIDObject = steamIdFriend });
+                AccountController.getAccount(user).AddFriend(new Friend() { steamFrindsID = "" + steamIdFriend.ConvertToUInt64().ToString(), chatLog = new ArrayList(), SteamIDObject = steamIdFriend });
 
                 // we'll just display the STEAM_ rendered version
                 Console.WriteLine("Friend: {0}", steamIdFriend.Render());
@@ -369,7 +287,7 @@ namespace SteamTwo
             // this callback is received when the persona state (friend information) of a friend changes
 
             // for this sample we'll simply display the names of the friends            
-            fObject.updateName(new Friend() { customName = callback.Name, steamFrindsID = callback.FriendID.ConvertToUInt64().ToString() });
+            AccountController.getAccount(user).setFriendsName(new Friend() { customName = callback.Name, steamFrindsID = callback.FriendID.ConvertToUInt64().ToString() });
             Console.WriteLine("State change: {0}", callback.Name);
         }
 
@@ -381,7 +299,7 @@ namespace SteamTwo
                 {
                     System.Windows.Forms.MessageBox.Show("New Message!" , "Steam Two" , System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Information);
                 }
-                fObject.updateChatLog(new Friend() { steamFrindsID =callback.Sender.ConvertToUInt64().ToString() }, callback.Message.ToString(), false);
+                AccountController.getAccount(user).updateChatLogs(new Friend() { steamFrindsID =callback.Sender.ConvertToUInt64().ToString() }, callback.Message.ToString(), false);
             }
         }
 
@@ -396,7 +314,7 @@ namespace SteamTwo
 
         public static void sendChatMessage(SteamID id, String msg)
         {
-            fObject.updateChatLog(new Friend() { steamFrindsID = id.ConvertToUInt64().ToString()},msg,true);
+            AccountController.getAccount(user).updateChatLogs(new Friend() { steamFrindsID = id.ConvertToUInt64().ToString()},msg,true);
             steamFriends.SendChatMessage(id , EChatEntryType.ChatMsg, msg);
         }
 

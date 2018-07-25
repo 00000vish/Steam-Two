@@ -22,8 +22,8 @@ namespace SteamTwo
     public partial class steamChatWindow
     {
         private DispatcherTimer dispatcherTimer;
-        public static steamChatWindow current = null; 
-
+        public static steamChatWindow current = null;
+        public string user = "";
 
         public steamChatWindow()
         {
@@ -47,8 +47,8 @@ namespace SteamTwo
         {
             int temp = friendsList1.SelectedIndex;
             friendsList1.Items.Clear();
-            if (SteamBotController.fObject != null)
-                foreach (var item in SteamBotController.fObject.getArray())
+            if (AccountController.getAccount(user).getFriendArray() != null)
+                foreach (var item in AccountController.getAccount(user).getFriendArray())
                 {
                     Friend obj = (Friend)item;
                     friendsList1.Items.Add(obj.getName());
@@ -64,7 +64,7 @@ namespace SteamTwo
             chatLog1.Items.RemoveAt(0);
             if (friendsList1.SelectedIndex != -1)
             {
-                foreach (var item in SteamBotController.fObject.get(friendsList1.SelectedIndex).chatLog)
+                foreach (var item in AccountController.getAccount(user).getFriend(friendsList1.SelectedIndex).chatLog)
                 {
                     if(item.ToString().Length > 104)
                     {
@@ -86,7 +86,7 @@ namespace SteamTwo
         {
             if (friendsList1.SelectedIndex != -1)
             {
-                SteamBotController.sendChatMessage(SteamBotController.fObject.get(friendsList1.SelectedIndex).SteamIDObject, textbox1.Text);
+                SteamBotController.sendChatMessage(AccountController.getAccount(user).getFriend(friendsList1.SelectedIndex).SteamIDObject, textbox1.Text);
             }
         }
 

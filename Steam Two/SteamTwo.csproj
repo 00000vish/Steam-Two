@@ -103,6 +103,7 @@
     <Compile Include="GetInput.xaml.cs">
       <DependentUpon>GetInput.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainAccount.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>

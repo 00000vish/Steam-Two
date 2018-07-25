@@ -29,7 +29,7 @@ namespace SteamTwo
 
                 } catch (Exception) { }                
             }
-            return new string[] { textbox1.Text, textbox2.Text};
+            return new string[] { textbox1.Text, textbox2.Text , desktopAuth.IsChecked.ToString()};
         }
 
         //add account button
