@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,7 +19,11 @@ namespace SteamTwo_Launcher
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            checkArgs();
+            try
+            {
+                checkArgs();
+            }
+            catch (Exception D) { MessageBox.Show(D.ToString());}           
             Environment.Exit(0);
         }
 
@@ -74,11 +80,12 @@ namespace SteamTwo_Launcher
 
         private static void luanchSteamTwo()
         {
-            using (Process p = new Process())
-            {
-                p.StartInfo = new ProcessStartInfo { FileName = "Steam Two.exe", Arguments = "startup" };
-                p.Start();
-            }
+
+            string exepath = AppDomain.CurrentDomain.BaseDirectory + "\\Steam Two.exe";
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = exepath;
+            psi.WorkingDirectory = Path.GetDirectoryName(exepath);
+            Process.Start(psi);          
         }
     }
 }
