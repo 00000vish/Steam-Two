@@ -4,7 +4,7 @@
 
 ![App](https://imgur.com/jczl2qm.png)
 
-![App](https://imgur.com/p6VL05A.png)
+![App](https://imgur.com/IegtlcG.png)
 
 ![App](https://imgur.com/849wXQp.png)
 
