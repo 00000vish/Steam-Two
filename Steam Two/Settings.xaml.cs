@@ -20,6 +20,7 @@ class SettingJson
     public bool autoLoginSetting { get; set; }
     public bool notifyOnMessageSetting { get; set; }
     public String SDALinkSetting { get; set; }
+    public int selectedAccountSetting { get; set; }
 }
 
 static class SteamTwoProperties
@@ -67,7 +68,8 @@ static class SteamTwoProperties
             autoStartSetting = false,
             autoLoginSetting = false,
             notifyOnMessageSetting = false,
-            SDALinkSetting = ""
+            SDALinkSetting = "",
+            selectedAccountSetting = 0
         };
     }
 
@@ -138,6 +140,12 @@ namespace SteamTwo
             {
                 Link.Content = "Linked";
             }
+            foreach (var item in AccountController.userAccounts)
+            {
+                UserAccount acc = (UserAccount)item;
+                comboBoxLogin.Items.Add(acc.username);
+            }
+            comboBoxLogin.SelectedIndex = SteamTwoProperties.jsonSetting.selectedAccountSetting;
         }
 
         //change passkey
@@ -240,6 +248,13 @@ namespace SteamTwo
         private void Settings1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             SteamTwoProperties.updateSettingFile();
+        }
+
+        private void comboBoxLogin_DropDownClosed(object sender, EventArgs e)
+        {
+            SteamTwoProperties.jsonSetting.selectedAccountSetting = comboBoxLogin.SelectedIndex;
+            SteamTwoProperties.updateSettingFile();
+            updateGUI();
         }
     }
 }

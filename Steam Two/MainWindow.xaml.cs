@@ -91,12 +91,11 @@ namespace SteamTwo
         //write account information to file
         internal static void writeAccountData()
         {
-            int index = 0;
             Account[] accArray = new Account[AccountController.userAccounts.Count];
             for (int i = 0; i < AccountController.userAccounts.Count; i++)
             {
                 UserAccount item = (UserAccount)AccountController.userAccounts[i];
-                accArray[index] = new Account { username = item.username, password = item.password ,  desktopAuth  = item.desktopAuth };
+                accArray[i] = new Account { username = item.username, password = item.password ,  desktopAuth  = item.desktopAuth };
             }
             string json = JsonConvert.SerializeObject(new jsonObject { count = accArray.Length, accounts = accArray });
             System.IO.File.WriteAllText(SAVE_FILE_NAME, json);
@@ -243,7 +242,7 @@ namespace SteamTwo
         {
             if (auto && AccountController.userAccounts.Count > 0 && LaunchedViaStartup)
             {
-                UserAccount account = (UserAccount)AccountController.userAccounts[0];
+                UserAccount account = (UserAccount)AccountController.userAccounts[SteamTwoProperties.jsonSetting.selectedAccountSetting];
                 LocalSteamController.startSteam(account.username, Cryptography.Decrypt(account.password, encryptionKey));
                 if (account.desktopAuth)
                 {

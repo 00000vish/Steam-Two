@@ -15,9 +15,10 @@
                     <CheckBox x:Name="copyPassword" Content="Double click to copy password" HorizontalAlignment="Left" Margin="24,86,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                     <CheckBox x:Name="badAttempt" Content="Delete account.file and reset after 3 bad attempts" HorizontalAlignment="Left" Margin="24,119,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                     <CheckBox x:Name="autoStart" Content="Auto Start with windows" HorizontalAlignment="Left" Margin="24,22,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
-                    <CheckBox x:Name="autoLogin" Content="Auto Login on steam with first account" HorizontalAlignment="Left" Margin="24,54,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox x:Name="autoLogin" Content="Auto Login on steam with" HorizontalAlignment="Left" Margin="24,54,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                     <Label Content="Steam Desktop Authenticator" Margin="44,176,508,144"/>
                     <Button x:Name="Link" Content="Link" HorizontalAlignment="Left" Margin="218,174,0,0" VerticalAlignment="Top" Width="78" Click="SDALink"/>
+                    <ComboBox x:Name="comboBoxLogin" HorizontalAlignment="Left" Margin="197,48,0,0" VerticalAlignment="Top" Width="120" DropDownClosed="comboBoxLogin_DropDownClosed"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Bot">
