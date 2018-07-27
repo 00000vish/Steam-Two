@@ -229,10 +229,8 @@ namespace SteamTwo
         {
             if (!SteamTwoProperties.jsonSetting.SDALinkSetting.Equals(""))
             {
-                string exepath = SteamTwoProperties.jsonSetting.SDALinkSetting;
                 ProcessStartInfo psi = new ProcessStartInfo();
-                psi.FileName = exepath;
-                psi.WorkingDirectory = Path.GetDirectoryName(exepath);
+                psi.FileName = SteamTwoProperties.jsonSetting.SDALinkSetting;
                 Process.Start(psi);
             }           
         }

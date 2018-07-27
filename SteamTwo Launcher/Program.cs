@@ -82,9 +82,9 @@ namespace SteamTwo_Launcher
         {
             string exepath = AppDomain.CurrentDomain.BaseDirectory + "\\Steam Two.exe";
             ProcessStartInfo psi = new ProcessStartInfo();
-            psi.FileName = exepath;
-            psi.Arguments = "startup";
+            psi.FileName = exepath;           
             psi.WorkingDirectory = Path.GetDirectoryName(exepath);
+            psi.Arguments = "startup";
             Process.Start(psi);          
         }
     }
