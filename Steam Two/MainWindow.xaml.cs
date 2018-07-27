@@ -84,7 +84,7 @@ namespace SteamTwo
             var JsonAccounts = JsonConvert.DeserializeObject<jsonObject>(File.ReadAllText(SAVE_FILE_NAME));
             for (int i = 0; i < JsonAccounts.count; i++)
             {
-                AccountController.addAccount(JsonAccounts.accounts[i].username, JsonAccounts.accounts[i].password, false);
+                AccountController.addAccount(JsonAccounts.accounts[i].username, JsonAccounts.accounts[i].password, JsonAccounts.accounts[i].desktopAuth);
             }
         }
 
@@ -226,11 +226,13 @@ namespace SteamTwo
 
         //opens Steam desktop Authenticator
         private void openSteamDesktopAuthAsync()
-        {
+        {            
             if (!SteamTwoProperties.jsonSetting.SDALinkSetting.Equals(""))
             {
+                string exepath = SteamTwoProperties.jsonSetting.SDALinkSetting;
                 ProcessStartInfo psi = new ProcessStartInfo();
-                psi.FileName = SteamTwoProperties.jsonSetting.SDALinkSetting;
+                psi.FileName = exepath;
+                psi.WorkingDirectory = Path.GetDirectoryName(exepath);
                 Process.Start(psi);
             }           
         }
@@ -242,6 +244,7 @@ namespace SteamTwo
             {
                 UserAccount account = (UserAccount)AccountController.userAccounts[SteamTwoProperties.jsonSetting.selectedAccountSetting];
                 LocalSteamController.startSteam(account.username, Cryptography.Decrypt(account.password, encryptionKey));
+                System.Windows.Forms.MessageBox.Show(account.desktopAuth.ToString());
                 if (account.desktopAuth)
                 {
                     openSteamDesktopAuthAsync();

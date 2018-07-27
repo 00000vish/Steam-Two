@@ -164,7 +164,7 @@ namespace SteamTwo
         private void openChat1_Click(object sender, RoutedEventArgs e)
         {
             steamChatWindow SCW = new steamChatWindow();
-            SCW.Show();
+            SCW.Show(username);
         }
 
         //idle button is clicked

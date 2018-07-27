@@ -35,6 +35,12 @@ namespace SteamTwo
             dispatcherTimer.Start();
         }
 
+        public void Show(String username)
+        {
+            user = username;
+            Show();
+        }
+
         //checks for chat message updates
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
