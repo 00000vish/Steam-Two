@@ -242,7 +242,8 @@ namespace SteamTwo
         {
             if (auto && AccountController.userAccounts.Count > 0 && LaunchedViaStartup)
             {
-                UserAccount account = (UserAccount)AccountController.userAccounts[SteamTwoProperties.jsonSetting.selectedAccountSetting];
+                UserAccount account = (UserAccount)AccountController.userAccounts[0];
+                account = (UserAccount)AccountController.getAccount(SteamTwoProperties.jsonSetting.selectedAccountSetting);
                 LocalSteamController.startSteam(account.username, Cryptography.Decrypt(account.password, encryptionKey));
                 if (account.desktopAuth)
                 {
