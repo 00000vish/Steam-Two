@@ -27,6 +27,8 @@
         <Button x:Name="storePage1" Content="Store Page" HorizontalAlignment="Left" Margin="306,177,0,0" VerticalAlignment="Top" Width="107" Click="storePage1_Click"/>
         <Button x:Name="launch1" Content="Launch" HorizontalAlignment="Left" Margin="306,54,0,0" VerticalAlignment="Top" Width="107" Click="launch1_Click"/>
         <Button x:Name="stopIdle1" Content="Stop Idle" HorizontalAlignment="Left" Margin="306,238,0,0" VerticalAlignment="Top" Width="107" Click="stopIdle1_Click"/>
+        <Button x:Name="Refresh" Content="Refresh" HorizontalAlignment="Left" Margin="306,276,0,0" VerticalAlignment="Top" Width="107" Click="Refresh_Click"/>
+        <CheckBox x:Name="Spam" Content="Spam Idling" HorizontalAlignment="Left" Margin="306,318,0,0" VerticalAlignment="Top" Width="107"/>
 
     </Grid>
 </Controls:MetroWindow>

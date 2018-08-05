@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace SteamTwo
 {
@@ -28,10 +29,11 @@ namespace SteamTwo
         private const String GAME_LIST_FILE = "game-list.txt";
         private const String SAM_GAME = STEAM_BOOST_DIRECTORY + "SAM.Game.exe";
 
+        private bool idleStoper = false; //mostly for spam is checked
         private ArrayList runningProc = new ArrayList();
 
         public ToolKit()
-        {           
+        {
             InitializeComponent();
         }
 
@@ -42,7 +44,7 @@ namespace SteamTwo
                 if (!File.Exists(GAME_LIST_FILE))
                 {
                     generateGames();
-                }       
+                }
                 getGamesFromFile();
             }
             else
@@ -50,7 +52,7 @@ namespace SteamTwo
                 System.Windows.Forms.MessageBox.Show("FILES MISSING  >>  download at \n https://github.com/vishwenga/Steam-Boost/."
                     + " \n\n\n MISSING FOLDER >> \n\n"
                     + Environment.CurrentDirectory.ToString() + STEAM_BOOST_DIRECTORY
-                    + " \n\n\n MISSING FILES IN FOLDER >> \n\n" 
+                    + " \n\n\n MISSING FILES IN FOLDER >> \n\n"
                     + Environment.CurrentDirectory.ToString() + STEAM_GAME_CONTROLLER + "\n\n"
                     + Environment.CurrentDirectory.ToString() + SAM_GAME + "\n\n"
                     + Environment.CurrentDirectory.ToString() + "\\steamBoost\\CSteamworks.dll \n\n"
@@ -61,7 +63,7 @@ namespace SteamTwo
 
                 Close();
             }
-           
+
         }
 
         //genereate game list file
@@ -121,7 +123,7 @@ namespace SteamTwo
         //store page is clicked
         private void storePage1_Click(object sender, RoutedEventArgs e)
         {
-            if(listView1.SelectedItem != null)
+            if (listView1.SelectedItem != null)
             {
                 ListViewItem item = new ListViewItem();
                 item = (ListViewItem)listView1.SelectedItem;
@@ -143,7 +145,7 @@ namespace SteamTwo
         //launch game is lcicked
         private void launch1_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (listView1.SelectedItem != null)
             {
                 ListViewItem item = new ListViewItem();
@@ -154,31 +156,72 @@ namespace SteamTwo
         }
 
         //idle is clicked
-        private void idle1_Click(object sender, RoutedEventArgs e)
+        private async void idle1_Click(object sender, RoutedEventArgs e)
         {
+            killRunningProc();
+            idleStoper = false;
             if (listView1.SelectedItem != null)
             {
-                ListViewItem item = new ListViewItem();
-                item = (ListViewItem)listView1.SelectedItem;
-                runningProc.Add(Process.Start(new ProcessStartInfo(STEAM_GAME_CONTROLLER, item.Tag.ToString()) { WindowStyle = ProcessWindowStyle.Hidden}));
+                if ((bool)Spam.IsChecked)
+                {
+                    do
+                    {
+                        startIdler(true);
+                        await Task.Delay(30000);
+                        killRunningProc();
+                        await Task.Delay(5000);
+
+                    } while (!idleStoper);
+                }
+                else
+                {
+                    startIdler(false);
+                }
+            }
+        }
+
+        //actaully start idle.exe 
+        private async void startIdler(bool delayed)
+        {
+            foreach (ListViewItem item in listView1.SelectedItems)
+            {
+                if (delayed)
+                    await Task.Delay(4000);
+                runningProc.Add(Process.Start(new ProcessStartInfo(STEAM_GAME_CONTROLLER, item.Tag.ToString()) { WindowStyle = ProcessWindowStyle.Hidden }));
             }
         }
 
         //stop idle clicked
         private void stopIdle1_Click(object sender, RoutedEventArgs e)
         {
+            idleStoper = true;
             killRunningProc();
         }
 
         //kill idle processed 
         private void killRunningProc()
         {
-            if(runningProc.Count > 0)
-            foreach (var item in runningProc)
+            if (runningProc.Count > 0)
             {
-                Process tempp = (Process)item;
-                tempp.Kill();
+                foreach (var item in runningProc)
+                {
+                    Process tempp = (Process)item;
+                    try
+                    {
+                        tempp.Kill();
+                    }
+                    catch (Exception) { }
+                }
+                runningProc.Clear();
             }
+        }
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            idleStoper = true;
+            killRunningProc();
+            File.Delete(GAME_LIST_FILE);
+            generateGames();
         }
     }
 }

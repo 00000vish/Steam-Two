@@ -244,7 +244,6 @@ namespace SteamTwo
             {
                 UserAccount account = (UserAccount)AccountController.userAccounts[SteamTwoProperties.jsonSetting.selectedAccountSetting];
                 LocalSteamController.startSteam(account.username, Cryptography.Decrypt(account.password, encryptionKey));
-                System.Windows.Forms.MessageBox.Show(account.desktopAuth.ToString());
                 if (account.desktopAuth)
                 {
                     openSteamDesktopAuthAsync();
