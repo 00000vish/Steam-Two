@@ -28,6 +28,8 @@
                     <CheckBox x:Name="chatCommandButton" Content="Enable Chat Commands" HorizontalAlignment="Left" Margin="24,78,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                     <CheckBox x:Name="multipleBots" Content="Open Multiple Bots" HorizontalAlignment="Left" Margin="24,108,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                     <CheckBox x:Name="notifyOnMessage" Content="Notify On Message" HorizontalAlignment="Left" Margin="24,141,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <Button x:Name="Forward" Content="No one" HorizontalAlignment="Left" Margin="171,164,0,0" VerticalAlignment="Top" Width="166" Click="Forward_Click"/>
+                    <CheckBox x:Name="Forward2" Content="Forward Messages to" HorizontalAlignment="Left" Margin="24,170,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Encryption">
@@ -42,8 +44,6 @@
                     <CheckBox Content="Quit Bot { !q }" HorizontalAlignment="Left" Margin="20,48,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                 </Grid>
             </TabItem>
-            <Button Content="Button" Height="100" Width="75"/>
-
         </TabControl>
         <Button x:Name="resetSettings" Content="Reset Settings" HorizontalAlignment="Left" Margin="644,361,0,0" VerticalAlignment="Top" Width="111" Click="resetSettings_Click"/>
     </Grid>

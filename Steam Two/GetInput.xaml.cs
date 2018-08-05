@@ -45,15 +45,7 @@ namespace SteamTwo
             {
                 key = new System.Net.NetworkCredential(string.Empty, PasswordBox1.SecurePassword).Password;
             }
-
-            if (key == "")
-            {
-                return "-1";
-            }
-            else
-            {
-                return key;
-            }
+            return key;            
         }
 
         //ok button is clicked

@@ -76,6 +76,21 @@ namespace SteamTwo
             }
         }
 
+        public String getFriendsName(Friend input)
+        {
+            foreach (var item in friendArray)
+            {
+
+                Friend temp = (Friend)item;
+                if (temp.steamFrindsID.Equals(input.steamFrindsID))
+                {
+                    return temp.customName;
+
+                }
+            }
+            return "";
+        }
+
         public void updateChatLogs(Friend input, String mgs, bool outgoing)
         {
             foreach (var item in friendArray)

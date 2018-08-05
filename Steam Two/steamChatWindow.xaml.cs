@@ -22,13 +22,11 @@ namespace SteamTwo
     public partial class steamChatWindow
     {
         private DispatcherTimer dispatcherTimer;
-        public static steamChatWindow current = null;
         public string user = "";
 
         public steamChatWindow()
         {
             InitializeComponent();
-            current = this;
             dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += dispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
@@ -37,6 +35,7 @@ namespace SteamTwo
 
         public void Show(String username)
         {
+            SteamBotController.chatOpen = true;
             user = username;
             Show();
         }
@@ -66,21 +65,21 @@ namespace SteamTwo
         public void updateChatLog()
         {
             chatLog1.Items.Clear();
-            chatLog1.Items.Add("                                                                                                        ");
-            chatLog1.Items.RemoveAt(0);
+            chatLog1.Items.Add("                                                                                                         ");
+            //chatLog1.Items.RemoveAt(0);
             if (friendsList1.SelectedIndex != -1)
             {
                 foreach (var item in AccountController.getAccount(user).getFriend(friendsList1.SelectedIndex).chatLog)
                 {
-                    if(item.ToString().Length > 104)
+                    if (item.ToString().Length > 104)
                     {
-                        chatLog1.Items.Add(item.ToString().Substring(0,104));
-                        chatLog1.Items.Add(item.ToString().Substring(104, item.ToString().Length-104));
+                        chatLog1.Items.Add(item.ToString().Substring(0, 104));
+                        chatLog1.Items.Add(item.ToString().Substring(104, item.ToString().Length - 104));
                     }
                     else
                     {
                         chatLog1.Items.Add(item);
-                    }                   
+                    }
 
                 }
             }
@@ -100,10 +99,10 @@ namespace SteamTwo
         private void textbox1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key.ToString().Equals("Return"))
-            {               
+            {
                 sendMessage();
                 textbox1.Text = "";
-            }            
+            }
         }
 
         //send button is clicked
@@ -116,17 +115,17 @@ namespace SteamTwo
         //since wpf u cant check windows state, just to keep track is chat window is focused and its checked from steam bot thread
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            current = null;
+            SteamBotController.chatOpen = false;            
         }
 
         private void MetroWindow_Deactivated(object sender, EventArgs e)
         {
-            current = null;
+            SteamBotController.chatOpen = false;
         }
 
         private void MetroWindow_Activated(object sender, EventArgs e)
         {
-            current = this;
+            SteamBotController.chatOpen = true;
         }
     }
 }

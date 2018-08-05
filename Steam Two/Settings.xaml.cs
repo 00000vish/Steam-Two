@@ -21,6 +21,8 @@ class SettingJson
     public bool notifyOnMessageSetting { get; set; }
     public String SDALinkSetting { get; set; }
     public String selectedAccountSetting { get; set; }
+    public bool forwardCheckSetting { get; set; }
+    public String forwardSetting { get; set; }
 }
 
 static class SteamTwoProperties
@@ -69,7 +71,9 @@ static class SteamTwoProperties
             autoLoginSetting = false,
             notifyOnMessageSetting = false,
             SDALinkSetting = "",
-            selectedAccountSetting = ""
+            selectedAccountSetting = "",
+            forwardCheckSetting = false,
+            forwardSetting = ""
         };
     }
 
@@ -119,6 +123,7 @@ namespace SteamTwo
         //updates gui according to currentsettings
         private void updateGUI()
         {
+            Forward2.IsChecked = SteamTwoProperties.jsonSetting.forwardCheckSetting;
             enableChat.IsChecked = SteamTwoProperties.jsonSetting.chatSetting;
             autoStart.IsChecked = SteamTwoProperties.jsonSetting.autoStartSetting;
             autoLogin.IsChecked = SteamTwoProperties.jsonSetting.autoLoginSetting;
@@ -132,7 +137,7 @@ namespace SteamTwo
             chatCommand.IsEnabled = SteamTwoProperties.jsonSetting.chatComSetting;
             chatCommandButton.IsChecked = SteamTwoProperties.jsonSetting.chatComSetting;
             notifyOnMessage.IsChecked = SteamTwoProperties.jsonSetting.notifyOnMessageSetting;
-            if(SteamTwoProperties.jsonSetting.SDALinkSetting.Equals(""))
+            if (SteamTwoProperties.jsonSetting.SDALinkSetting.Equals(""))
             {
                 Link.Content = "Link";
             }
@@ -146,6 +151,14 @@ namespace SteamTwo
                 comboBoxLogin.Items.Add(acc.username);
             }
             comboBoxLogin.Text = SteamTwoProperties.jsonSetting.selectedAccountSetting;
+            if (!SteamTwoProperties.jsonSetting.forwardSetting.Equals(""))
+            {
+                Forward.Content = SteamTwoProperties.jsonSetting.forwardSetting;
+            }
+            else
+            {
+                Forward.Content = "No one";
+            }
         }
 
         //change passkey
@@ -163,7 +176,7 @@ namespace SteamTwo
             MainWindow.setEncryptionKey(temp);
             MainWindow.writeAccountData();
 
-        }     
+        }
 
         //when settings changed
         private void settingsChanged(object sender, RoutedEventArgs e)
@@ -176,7 +189,7 @@ namespace SteamTwo
             if (SteamTwoProperties.jsonSetting.encryptedSetting == true && item.Name.ToString().Equals("enableEncryption"))
             {
                 changeKeyClicked();
-            }           
+            }
 
             //auto start
             SteamTwoProperties.jsonSetting.autoStartSetting = (bool)autoStart.IsChecked;
@@ -188,7 +201,7 @@ namespace SteamTwo
             {
                 deleteRegKey();
             }
-
+            SteamTwoProperties.jsonSetting.forwardCheckSetting = (bool)Forward2.IsChecked;
             SteamTwoProperties.jsonSetting.autoLoginSetting = (bool)autoLogin.IsChecked;
             SteamTwoProperties.jsonSetting.badAttemptSetting = (bool)badAttempt.IsChecked;
             SteamTwoProperties.jsonSetting.multipleBotSetting = (bool)multipleBots.IsChecked;
@@ -253,6 +266,16 @@ namespace SteamTwo
         private void comboBoxLogin_DropDownClosed(object sender, EventArgs e)
         {
             SteamTwoProperties.jsonSetting.selectedAccountSetting = comboBoxLogin.Text;
+            SteamTwoProperties.updateSettingFile();
+            updateGUI();
+        }
+
+        private void Forward_Click(object sender, RoutedEventArgs e)
+        {
+            GetInput FBTN = new GetInput();
+            String var = FBTN.Show("Forward Messages", "Enter steamID (STEAM_0:0:00000000) of the account the below", false);
+            FBTN.Close();
+            SteamTwoProperties.jsonSetting.forwardSetting = var;
             SteamTwoProperties.updateSettingFile();
             updateGUI();
         }

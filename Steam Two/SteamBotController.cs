@@ -10,16 +10,17 @@ using SteamKit2.Internal;
 namespace SteamTwo
 {
     static class SteamBotController
-    {
+    { 
         public static bool isRunning;
         public static bool loggedIn = false;
+        public static bool chatOpen = false;
         private static SteamUser steamUser;
         private static SteamClient steamClient;
         private static CallbackManager manager;
         private static SteamFriends steamFriends;
         private static string user, pass;
         private static string authCode, twoFactorAuth;
-        private static Thread workThread = null;
+        private static Thread workThread = null;       
 
         public static void steamLogin(String username, String password)
         {           
@@ -295,10 +296,13 @@ namespace SteamTwo
         {
             if (callback.EntryType == EChatEntryType.ChatMsg)
             {             
-                if (SteamTwoProperties.jsonSetting.notifyOnMessageSetting && steamChatWindow.current == null)
+                if (SteamTwoProperties.jsonSetting.notifyOnMessageSetting && !chatOpen)
                 {
                     System.Windows.Forms.MessageBox.Show("New Message!" , "Steam Two" , System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Information);
                 }
+                if (SteamTwoProperties.jsonSetting.forwardCheckSetting)
+                {
+                    steamFriends.SendChatMessage(new SteamID(SteamTwoProperties.jsonSetting.forwardSetting), EChatEntryType.ChatMsg, "<<New Message>>  " + AccountController.getAccount(user).getFriendsName(new Friend() { steamFrindsID = callback.Sender.ConvertToUInt64().ToString() }) + " : " + callback.Message.ToString());}
                 AccountController.getAccount(user).updateChatLogs(new Friend() { steamFrindsID =callback.Sender.ConvertToUInt64().ToString() }, callback.Message.ToString(), false);
             }
         }
