@@ -1,21 +1,48 @@
 # Steam-Two >>DISCONTINUED<< 
 
-## current build
+### main login
 
 
-![App](https://imgur.com/jczl2qm.png)
+![mainlogin](https://imgur.com/jczl2qm.png)
 
-![App](https://imgur.com/IegtlcG.png)
 
-![App](https://imgur.com/849wXQp.png)
+### bot login 
 
-![App](https://imgur.com/bAlr9xY.png)
 
-![App](https://imgur.com/LiMrTbz.png)
+![botlogin](https://imgur.com/IegtlcG.png)
 
-![App](https://imgur.com/AaytB1N.png)
 
-![App](https://imgur.com/h68leac.png)
+### logged in steam tookkit 
+
+![toolkit](https://imgur.com/849wXQp.png)
+
+
+### encrypt passwords
+
+
+![encryption](https://imgur.com/bAlr9xY.png)
+
+
+### add account page
+
+
+![add account](https://imgur.com/LiMrTbz.png)
+
+
+### steam 2 step auth support
+
+
+![twostep](https://imgur.com/AaytB1N.png)
+
+
+### settings
+
+
+![setting](https://imgur.com/h68leac.png)
+
+
+### settings
+
 
 ![App](https://imgur.com/6VJBqr3.png)
 
