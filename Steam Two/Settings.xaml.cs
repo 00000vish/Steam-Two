@@ -10,7 +10,7 @@ class SettingJson
     public bool encryptedSetting { get; set; }
     public bool autoAddFriendSetting { get; set; }
     public bool chatComSetting { get; set; }
-    public String encryptedKeySetting { get; set; }
+    public string encryptedKeySetting { get; set; }
     public bool closeStemLaunchSetting { get; set; }
     public bool copyPasswordSetting { get; set; }
     public bool multipleBotSetting { get; set; }
@@ -19,15 +19,15 @@ class SettingJson
     public bool autoStartSetting { get; set; }
     public bool autoLoginSetting { get; set; }
     public bool notifyOnMessageSetting { get; set; }
-    public String SDALinkSetting { get; set; }
-    public String selectedAccountSetting { get; set; }
+    public string SDALinkSetting { get; set; }
+    public string selectedAccountSetting { get; set; }
     public bool forwardCheckSetting { get; set; }
-    public String forwardSetting { get; set; }
+    public string forwardSetting { get; set; }
 }
 
 static class SteamTwoProperties
 {
-    private const String SETTING_FILE = "SteamTwoSetting.config";
+    private const string SETTING_FILE = "SteamTwoSetting.config";
     public static SettingJson jsonSetting = null;
 
     //init settings
@@ -171,7 +171,7 @@ namespace SteamTwo
         private void changeKeyClicked()
         {
             GetInput GI = new GetInput();
-            String temp = GI.Show("Encryption", "Please enter the passkey below", false);
+            string temp = GI.Show("Encryption", "Please enter the passkey below", false);
             GI.Close();
             MainWindow.setEncryptionKey(temp);
             MainWindow.writeAccountData();
@@ -273,7 +273,7 @@ namespace SteamTwo
         private void Forward_Click(object sender, RoutedEventArgs e)
         {
             GetInput FBTN = new GetInput();
-            String var = FBTN.Show("Forward Messages", "Enter steamID (STEAM_0:0:00000000) of the account the below", false);
+            string var = FBTN.Show("Forward Messages", "Enter steamID (STEAM_0:0:00000000) of the account the below", false);
             FBTN.Close();
             SteamTwoProperties.jsonSetting.forwardSetting = var;
             SteamTwoProperties.updateSettingFile();

@@ -288,7 +288,7 @@ namespace SteamTwo
             // this callback is received when the persona state (friend information) of a friend changes
 
             // for this sample we'll simply display the names of the friends            
-            AccountController.getAccount(user).setFriendsName(new Friend() { customName = callback.Name, steamFrindsID = callback.FriendID.ConvertToUInt64().ToString() });
+            AccountController.getAccount(user).setFriendsName(new Friend() { name = callback.Name, steamFrindsID = callback.FriendID.ConvertToUInt64().ToString() });
             Console.WriteLine("State change: {0}", callback.Name);
         }
 

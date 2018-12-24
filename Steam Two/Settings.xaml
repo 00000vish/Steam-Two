@@ -41,7 +41,7 @@
             <TabItem x:Name="chatCommand" Header="Commands">
                 <Grid>
                     <CheckBox Content="Quit Bot { !q }" HorizontalAlignment="Left" Margin="20,19,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
-                    <CheckBox Content="Quit Bot { !q }" HorizontalAlignment="Left" Margin="20,48,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
+                    <CheckBox Content="Quit Steam Two { !qs }" HorizontalAlignment="Left" Margin="20,48,0,0" VerticalAlignment="Top" Click="settingsChanged"/>
                 </Grid>
             </TabItem>
         </TabControl>

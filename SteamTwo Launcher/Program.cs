@@ -21,6 +21,8 @@ namespace SteamTwo_Launcher
             Application.SetCompatibleTextRenderingDefault(false);
             try
             {
+                //since cant detect if user open or started with windows
+                //this app will only open with windows and opens app with -startup let main know its open with windowws
                 checkArgs();
             }
             catch (Exception D) { MessageBox.Show(D.ToString());}           
@@ -50,6 +52,7 @@ namespace SteamTwo_Launcher
             }
         }
 
+        //delte auto start reg key
         private static void deleteRegistryKey()
         {
             Microsoft.Win32.RegistryKey regKey = default(Microsoft.Win32.RegistryKey);
@@ -63,6 +66,7 @@ namespace SteamTwo_Launcher
             regKey.Close();
         }
 
+        //create auto start reg key
         private static void createRegistryKey()
         {
             Microsoft.Win32.RegistryKey regKey = default(Microsoft.Win32.RegistryKey);
@@ -77,7 +81,7 @@ namespace SteamTwo_Launcher
             Properties.Settings.Default.Save();
             regKey.Close();
         }
-
+        //start the main app
         private static void luanchSteamTwo()
         {
             string exepath = AppDomain.CurrentDomain.BaseDirectory + "\\Steam Two.exe";

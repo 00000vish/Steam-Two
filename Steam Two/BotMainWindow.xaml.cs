@@ -36,9 +36,16 @@ namespace SteamTwo
             } while (!_shown && !SteamBotController.loggedIn);
             SteamBotController.steamLogin(username, p);
             initLogics();
-            label1.Content = "Login into " + username;
+            label1.Content = "Logged into: " + username;
             openChat1.IsEnabled = SteamTwoProperties.jsonSetting.chatSetting;
-            label3.Content = "Chat Commands On : " + SteamTwoProperties.jsonSetting.chatComSetting;             
+            if (SteamTwoProperties.jsonSetting.chatComSetting)
+            {
+                label3.Content = "Chat Commands: On";
+            }
+            else
+            {
+                label3.Content = "Chat Commands: Off";
+            }          
         }
 
         //checks if the game file is there and reads it, if not found it open steam boost and generate game lsit
