@@ -123,6 +123,7 @@ namespace SteamTwo
         //updates gui according to currentsettings
         private void updateGUI()
         {
+            comboBoxLogin.Items.Clear();
             Forward2.IsChecked = SteamTwoProperties.jsonSetting.forwardCheckSetting;
             enableChat.IsChecked = SteamTwoProperties.jsonSetting.chatSetting;
             autoStart.IsChecked = SteamTwoProperties.jsonSetting.autoStartSetting;

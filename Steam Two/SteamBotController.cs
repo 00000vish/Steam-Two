@@ -11,7 +11,7 @@ namespace SteamTwo
 {
     static class SteamBotController
     { 
-        public static bool isRunning;
+        private static bool isRunning;
         public static bool loggedIn = false;
         public static bool chatOpen = false;
         private static SteamUser steamUser;
@@ -40,6 +40,7 @@ namespace SteamTwo
         {
             steamUser.LogOff();
             workThread.Abort();
+            loggedIn = false;
         }
 
         private static void steamLogin()
@@ -132,7 +133,11 @@ namespace SteamTwo
 
             Thread.Sleep(TimeSpan.FromSeconds(5));
 
-            steamClient.Connect();
+            //means disconnect was not users request so we reconnect
+            if (loggedIn)
+            {
+                steamClient.Connect();
+            }
         }
 
         static void OnLoggedOn(SteamUser.LoggedOnCallback callback)
@@ -184,7 +189,7 @@ namespace SteamTwo
         }
 
         static void OnLoggedOff(SteamUser.LoggedOffCallback callback)
-        {
+        {            
             Console.WriteLine("Logged off of Steam: {0}", callback.Result);
         }
 

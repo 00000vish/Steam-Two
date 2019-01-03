@@ -13,11 +13,11 @@ namespace SteamTwo
     /// </summary>
     public partial class BotMainWindow
     {
-        private const String STEAM_BOOST_DIRECTORY = "steamBoost\\";
-        private const String STEAM_GAME_CONTROLLER = STEAM_BOOST_DIRECTORY + "steamGameControl.exe";  //https://github.com/vishwenga/Steam-Boost/tree/master/steamGameControl
-        private const String SAM_GAME = STEAM_BOOST_DIRECTORY + "SAM.Game.exe";
+        private const string STEAM_BOOST_DIRECTORY = "steamBoost\\";
+        private const string STEAM_GAME_CONTROLLER = STEAM_BOOST_DIRECTORY + "steamGameControl.exe";  //https://github.com/vishwenga/Steam-Boost/tree/master/steamGameControl
+        private const string SAM_GAME = STEAM_BOOST_DIRECTORY + "SAM.Game.exe";
 
-        private String gameListFile = "-game-list.txt";
+        private string gameListFile = "-game-list.txt";
 
         public BotMainWindow()
         {
@@ -27,6 +27,9 @@ namespace SteamTwo
         string username; // log in on the bot with username and password
         public void Show(string u, string p, MainWindow backHandle)
         {
+            logIn1.IsEnabled = false;
+            logOut1.IsEnabled = true;
+
             this.username = u;
             gameListFile = username + gameListFile;          
             Show();
@@ -45,7 +48,7 @@ namespace SteamTwo
             else
             {
                 label3.Content = "Chat Commands: Off";
-            }          
+            }  
         }
 
         //checks if the game file is there and reads it, if not found it open steam boost and generate game lsit
@@ -109,13 +112,22 @@ namespace SteamTwo
         //log out is clicked
         private void logOut1_Click(object sender, RoutedEventArgs e)
         {
+            label1.Content = "Logged off...";
             SteamBotController.logBotOff();
+            logIn1.IsEnabled = true;
+            logOut1.IsEnabled = false;
         }
 
         //log in is clicked
         private void logIn1_Click(object sender, RoutedEventArgs e)
-        {
-            SteamBotController.logBotIn();
+        { 
+            if (!SteamBotController.loggedIn)
+            {
+                label1.Content = "Logged into: " + username;
+                SteamBotController.logBotIn();
+                logIn1.IsEnabled = false;
+                logOut1.IsEnabled = true;
+            }            
         }
 
         //end bot is clicked
