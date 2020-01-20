@@ -6,22 +6,37 @@ namespace SteamTwo
     class LocalSteamController
     {
         //starts steam
-        public static void startSteam(String username, String password)
+        public static bool startSteam(String username, String password)
         {
             killSteam();
-            System.Threading.Thread.Sleep(2000);
-            Process proc = new Process
+            if (checkForSteam())
             {
-                StartInfo = new ProcessStartInfo
+                System.Threading.Thread.Sleep(2000);
+                Process proc = new Process
                 {
-                    FileName = "E:\\Program Files (x86)\\Steam\\Steam.exe",
-                    Arguments = "-login " + username + " " + password,
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    CreateNoWindow = true
-                }
-            };
-            proc.Start();
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = SteamTwoProperties.jsonSetting.steamLocation,
+                        Arguments = "-login " + username + " " + password,
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        CreateNoWindow = true
+                    }
+                };
+                proc.Start();
+                return true;
+            }
+            return false;
+        }
+
+        //finds steam
+        private static bool checkForSteam()
+        {
+            if(!System.IO.File.Exists(SteamTwoProperties.jsonSetting.steamLocation)){
+                new SteamTwo.Settings().Show("find steam");
+                return false;
+            }
+            return true;
         }
 
         //kills steam

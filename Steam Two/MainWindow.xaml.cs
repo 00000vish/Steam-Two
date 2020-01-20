@@ -55,7 +55,7 @@ namespace SteamTwo
                 updateAccountList();
                 if (SteamTwoProperties.jsonSetting.autoLoginSetting)
                 {
-                    autoLoginSteam(true);
+                    loginOnSteam(true);
                 }
             }
         }
@@ -192,7 +192,7 @@ namespace SteamTwo
         //login on steam
         private void loginSteam1_Click(object sender, RoutedEventArgs e)
         {
-            autoLoginSteam(false);
+            loginOnSteam(false);
         }
 
         //before closing form
@@ -237,32 +237,34 @@ namespace SteamTwo
             }           
         }
 
-        //auto login
-        private void autoLoginSteam(bool auto)
+        //steam login
+        private void loginOnSteam(bool auto)
         {
+            //on start up
             if (auto && AccountController.userAccounts.Count > 0 && LaunchedViaStartup)
             {
                 UserAccount account = (UserAccount)AccountController.userAccounts[0];
                 account = (UserAccount)AccountController.getAccount(SteamTwoProperties.jsonSetting.selectedAccountSetting);
-                LocalSteamController.startSteam(account.username, Cryptography.Decrypt(account.password, encryptionKey));
+                bool success = LocalSteamController.startSteam(account.username, Cryptography.Decrypt(account.password, encryptionKey));
                 if (account.desktopAuth)
                 {
                     openSteamDesktopAuthAsync();
                 }                
-                if (SteamTwoProperties.jsonSetting.closeStemLaunchSetting)
+                if (SteamTwoProperties.jsonSetting.closeStemLaunchSetting && success)
                 {
                     beforeClosing();
                 }
             }
+            //normal login button click
             if (!auto && listView1.SelectedItem != null)
             {
                 UserAccount account = (UserAccount)AccountController.userAccounts[listView1.SelectedIndex];
-                LocalSteamController.startSteam(account.username, Cryptography.Decrypt(account.password, encryptionKey));
+                bool success = LocalSteamController.startSteam(account.username, Cryptography.Decrypt(account.password, encryptionKey));
                 if (account.desktopAuth)
                 {
                     openSteamDesktopAuthAsync();
                 }
-                if (SteamTwoProperties.jsonSetting.closeStemLaunchSetting)
+                if (SteamTwoProperties.jsonSetting.closeStemLaunchSetting && success)
                 {
                     beforeClosing();
                 }

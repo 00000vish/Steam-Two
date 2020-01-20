@@ -19,6 +19,8 @@
                     <Label Content="Steam Desktop Authenticator" Margin="44,176,508,144"/>
                     <Button x:Name="Link" Content="Link" HorizontalAlignment="Left" Margin="218,174,0,0" VerticalAlignment="Top" Width="78" Click="SDALink"/>
                     <ComboBox x:Name="comboBoxLogin" HorizontalAlignment="Left" Margin="197,48,0,0" VerticalAlignment="Top" Width="120" DropDownClosed="comboBoxLogin_DropDownClosed"/>
+                    <Label Content="Steam Location" Margin="44,210,508,110"/>
+                    <Button x:Name="SteamLink" Content="E:\Program Files (x86)\Steam\Steam.exe" HorizontalAlignment="Left" Margin="218,208,0,0" VerticalAlignment="Top" Width="299" Click="changeSteamLoc_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Bot">

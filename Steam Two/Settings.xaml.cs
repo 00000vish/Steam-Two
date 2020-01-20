@@ -23,6 +23,7 @@ class SettingJson
     public string selectedAccountSetting { get; set; }
     public bool forwardCheckSetting { get; set; }
     public string forwardSetting { get; set; }
+    public string steamLocation { get; set; }
 }
 
 static class SteamTwoProperties
@@ -73,7 +74,8 @@ static class SteamTwoProperties
             SDALinkSetting = "",
             selectedAccountSetting = "",
             forwardCheckSetting = false,
-            forwardSetting = ""
+            forwardSetting = "",
+            steamLocation = "C:\\Program Files (x86)\\Steam\\Steam.exe"
         };
     }
 
@@ -114,10 +116,15 @@ namespace SteamTwo
             InitializeComponent();
         }
 
-        public void Show(String ignore)
+        public void Show(string cond)
         {
             Show();
             updateGUI();
+            switch (cond.ToLower())
+            {
+                case "find steam": SteamLink.Content = "Click here to locate Steam.exe"; break;
+                default: break;
+            }
         }
 
         //updates gui according to currentsettings
@@ -138,6 +145,7 @@ namespace SteamTwo
             chatCommand.IsEnabled = SteamTwoProperties.jsonSetting.chatComSetting;
             chatCommandButton.IsChecked = SteamTwoProperties.jsonSetting.chatComSetting;
             notifyOnMessage.IsChecked = SteamTwoProperties.jsonSetting.notifyOnMessageSetting;
+            SteamLink.Content = SteamTwoProperties.jsonSetting.steamLocation;
             if (SteamTwoProperties.jsonSetting.SDALinkSetting.Equals(""))
             {
                 Link.Content = "Link";
@@ -160,6 +168,21 @@ namespace SteamTwo
             {
                 Forward.Content = "No one";
             }
+        }
+
+        private void changeSteamLoc_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.OpenFileDialog fd = new System.Windows.Forms.OpenFileDialog();
+            if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                SteamTwoProperties.jsonSetting.steamLocation = fd.FileName;
+            }
+            else
+            {
+                SteamTwoProperties.jsonSetting.steamLocation = "C:\\Program Files (x86)\\Steam\\Steam.exe";
+            }
+            SteamTwoProperties.updateSettingFile();
+            updateGUI();
         }
 
         //change passkey
