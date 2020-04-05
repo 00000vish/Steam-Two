@@ -29,11 +29,11 @@ namespace SteamTwo
             return false;
         }
 
-        //finds steam
+        //finds steam in disk
         private static bool checkForSteam()
         {
             if(!System.IO.File.Exists(SteamTwoProperties.jsonSetting.steamLocation)){
-                new SteamTwo.Settings().Show("find steam");
+                new SteamTwo.Settings().Show("find steam"); // if not ask to locate it
                 return false;
             }
             return true;
@@ -45,7 +45,7 @@ namespace SteamTwo
             Process[] proc = Process.GetProcesses();
             foreach (Process item in proc)
             {
-                if (item.ProcessName.Equals("Steam") || item.ProcessName.Equals("GameOverlayUI"))
+                if (item.ProcessName.ToLower().Equals("steam") || item.ProcessName.Equals("gameOverlayui"))
                 {
                     item.Kill();
                 }
