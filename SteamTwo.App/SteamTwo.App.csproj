@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>SteamTwo.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="FodyWeavers.xml" />
+    <None Remove="SteamTwo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="SteamTwo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro" Version="2.4.9" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
+    <PackageReference Include="ReactiveUI.Fody" Version="18.4.1" />
+    <PackageReference Include="ReactiveUI.WPF" Version="18.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SteamTwo.Shared\SteamTwo.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="FodyWeavers.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="SteamTwo.ico" />
+  </ItemGroup>
+
+</Project>

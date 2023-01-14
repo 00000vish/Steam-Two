@@ -1,0 +1,45 @@
+﻿<mah:MetroWindow  
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
+        x:Class="SteamTwo.App.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SteamTwo.App.Views"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        Title="SteamTwo" TitleCharacterCasing="Normal" ShowMaxRestoreButton="False"
+        MaxHeight="450" MaxWidth="350" 
+        MinHeight="450" MinWidth="350"
+        ShowIconOnTitleBar="True" Icon="./../SteamTwo.ico">
+
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Button Content="Settings"
+                    Command="{Binding SettingsCommand}"/>
+            <Button Command="{Binding GithubCommand}">
+                <iconPacks:BootstrapIcons Kind="GitHub" />
+            </Button>
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
+    <Grid Margin="10">
+        <Border BorderBrush="Black"
+                BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.Background>
+                        <SolidColorBrush Color="LightGray"/>
+                    </Grid.Background>
+                    <Label Content="STEAM ACCOUNTS"
+                           HorizontalAlignment="Center"
+                           FontSize=""/>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</mah:MetroWindow>
