@@ -7,11 +7,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamTwo.App.Views"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:test="clr-namespace:SteamTwo.Shared.Helpers;assembly=SteamTwo.Shared"
         mc:Ignorable="d"
         Title="SteamTwo" TitleCharacterCasing="Normal" ShowMaxRestoreButton="False"
-        MaxHeight="450" MaxWidth="350" 
-        MinHeight="450" MinWidth="350"
+        MaxHeight="470" MaxWidth="320" 
+        MinHeight="470" MinWidth="320"
         ShowIconOnTitleBar="True" Icon="./../SteamTwo.ico">
+
+    <mah:MetroWindow.Resources>
+        <ResourceDictionary Source="pack://application:,,,/SteamTwo.Shared;component/Resources/SharedDictionary.xaml"/>
+    </mah:MetroWindow.Resources>
 
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
@@ -37,7 +42,7 @@
                     </Grid.Background>
                     <Label Content="STEAM ACCOUNTS"
                            HorizontalAlignment="Center"
-                           FontSize=""/>
+                           FontSize="{StaticResource Header}"/>
                 </Grid>
             </Grid>
         </Border>
