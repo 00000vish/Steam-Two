@@ -1,19 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
+using SteamTwo.Shared.Helpers;
 
 namespace SteamTwo.Shared.Models
 {
     public class SteamAccount
     {
+        [JsonProperty]
         public string Username { get; }
-        public string Password { get; }
-        public SteamAccount(string username, string password)
+        [JsonProperty]
+        public string PasswordEncrypted { get; }
+
+        private SteamAccount(string username, string password)
         {
             Username = username;
-            Password = password;
+            PasswordEncrypted = Encryptor.Encrypt(password);
+        }
+        
+        public string GetPassword()
+        {
+            return Encryptor.Decrypt(PasswordEncrypted);
         }
     }
 }

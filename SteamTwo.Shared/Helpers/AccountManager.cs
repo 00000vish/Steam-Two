@@ -1,10 +1,25 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using SteamTwo.Shared.Models;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace SteamTwo.Shared.Helpers
 {
     public static class AccountManager
     {
+        private static List<SteamAccount> _accounts = new();
         private static string _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".accounts");
+        
+        public static void AddAccount(SteamAccount account)
+        {
+            _accounts.Add(account); 
+        }
+
+        private static void Save()
+        {
+            JsonConvert.SerializeObject(_accounts);
+        }
     }
 }
