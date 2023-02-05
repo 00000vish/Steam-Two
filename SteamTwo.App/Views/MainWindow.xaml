@@ -20,7 +20,7 @@
 
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
-            <Button Content="Settings"
+            <Button Content="settings"
                     Command="{Binding SettingsCommand}"/>
             <Button Command="{Binding GithubCommand}">
                 <iconPacks:BootstrapIcons Kind="GitHub" />

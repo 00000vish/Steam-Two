@@ -1,4 +1,5 @@
-﻿using SteamTwo.App.ViewModels;
+﻿using MahApps.Metro.Controls;
+using SteamTwo.App.ViewModels;
 using SteamTwo.App.Views;
 using System.Windows;
 
@@ -7,7 +8,7 @@ namespace SteamTwo.App.Windows
     /// <summary>
     /// Interaction logic for MasterKeyView.xaml
     /// </summary>
-    public partial class MasterKeyView : Window
+    public partial class MasterKeyView : MetroWindow
     {
         public MasterKeyView()
         {
