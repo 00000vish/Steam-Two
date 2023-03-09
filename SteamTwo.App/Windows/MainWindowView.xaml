@@ -1,18 +1,16 @@
-﻿<mah:MetroWindow  
-        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
-        x:Class="SteamTwo.App.Views.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SteamTwo.App.Views"
-        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:test="clr-namespace:SteamTwo.Shared.Helpers;assembly=SteamTwo.Shared"
-        mc:Ignorable="d"
-        Title="SteamTwo" TitleCharacterCasing="Normal" ShowMaxRestoreButton="False" Topmost="True"
-        MaxHeight="470" MaxWidth="320" 
-        MinHeight="470" MinWidth="320"
-        ShowIconOnTitleBar="True" Icon="./../SteamTwo.ico">
+﻿<mah:MetroWindow  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
+                  x:Class="SteamTwo.App.Windows.MainWindowView"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:local="clr-namespace:SteamTwo.App.Windows"
+                  mc:Ignorable="d"
+                  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                  Title="SteamTwo" TitleCharacterCasing="Normal" ShowMaxRestoreButton="False" Topmost="True"
+                  MaxHeight="470" MaxWidth="320" 
+                  MinHeight="470" MinWidth="320"
+                  ShowIconOnTitleBar="True" Icon="./../SteamTwo.ico"> 
 
     <mah:MetroWindow.Resources>
         <ResourceDictionary Source="pack://application:,,,/SteamTwo.Shared;component/Resources/SharedDictionary.xaml"/>

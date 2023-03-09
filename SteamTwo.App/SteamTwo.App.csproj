@@ -35,4 +35,8 @@
     <Resource Include="SteamTwo.ico" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\" />
+  </ItemGroup>
+
 </Project>

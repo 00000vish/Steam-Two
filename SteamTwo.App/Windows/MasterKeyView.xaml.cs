@@ -1,6 +1,5 @@
 ﻿using MahApps.Metro.Controls;
 using SteamTwo.App.ViewModels;
-using SteamTwo.App.Views;
 using System.Windows;
 
 namespace SteamTwo.App.Windows
@@ -28,7 +27,7 @@ namespace SteamTwo.App.Windows
                 };
                 vm.OpenMainWindow = () =>
                 {
-                    MainWindow mainWindow = new MainWindow();
+                    MainWindowView mainWindow = new MainWindowView();
                     mainWindow.Show();
                     this.Close();
                 };
