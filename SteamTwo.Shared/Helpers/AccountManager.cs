@@ -3,29 +3,34 @@ using SteamTwo.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Json.Serialization;
+using System.Linq;
 
 namespace SteamTwo.Shared.Helpers
 {
     public static class AccountManager
     {
-        private static string _masterKey = "";
-        private static List<SteamAccount> _accounts = new();
         private static string _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".accounts");
-        
-        public static void LoadAccounts(string masterKey)
+        private static List<SteamAccount> _accounts = new();
+
+        public static void LoadAccounts()
         {
-            _masterKey = masterKey;
+            if (File.Exists(_filePath))
+            {
+                var accs = JsonConvert.DeserializeObject<List<SteamAccount>>(_filePath) ?? new();
+                var accsValid = accs.Where(x => x.Validate()).ToList();
+                _accounts = accsValid;
+            }
         }
 
         public static void AddAccount(SteamAccount account)
         {
-            _accounts.Add(account); 
+            _accounts.Add(account);
         }
 
-        private static void Save()
+        public static void SaveAccounts()
         {
-            JsonConvert.SerializeObject(_accounts);
+            var output = JsonConvert.SerializeObject(_accounts);
+            File.WriteAllText(output, _filePath);
         }
     }
 }

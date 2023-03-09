@@ -20,5 +20,10 @@ namespace SteamTwo.Shared.Models
         {
             return Encryptor.Decrypt(PasswordEncrypted);
         }
+
+        public bool Validate()
+        {
+            return true;
+        }
     }
 }

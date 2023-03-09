@@ -8,9 +8,7 @@ namespace SteamTwo.Shared.Helpers
 {
     public static class Encryptor
     {
-        public static string MasterKey = "";
-
-        #region Settings
+        private static string _masterKey = "6uh5GTFjUPvf7P";
 
         private static readonly int _iterations = 2;
         private static readonly int _keySize = 256;
@@ -19,11 +17,19 @@ namespace SteamTwo.Shared.Helpers
         private static readonly string _salt = "TKB5ZxYXYrbBWQ";
         private static readonly string _vector = "L2v77knCVjvgZQ";
 
-        #endregion
+        public static void SetMasterKey(string masterKey)
+        {
+            _masterKey = masterKey; 
+        }
 
         public static string Encrypt(string value)
         {
-            return Encrypt(Aes.Create(), value, MasterKey);
+            return Encrypt(Aes.Create(), value, _masterKey);
+        }
+
+        public static string Decrypt(string value)
+        {
+            return Decrypt(Aes.Create(), value, _masterKey);
         }
 
         private static string Encrypt<T>(T encryptAlg, string value, string password) where T : SymmetricAlgorithm
@@ -58,10 +64,6 @@ namespace SteamTwo.Shared.Helpers
             return Convert.ToBase64String(encrypted);
         }
 
-        public static string Decrypt(string value)
-        {
-            return Decrypt(Aes.Create(), value, MasterKey);
-        }
         private static string Decrypt<T>(T encryptAlg, string value, string password) where T : SymmetricAlgorithm
         {
             byte[] vectorBytes = Encoding.ASCII.GetBytes(_vector);
@@ -101,5 +103,6 @@ namespace SteamTwo.Shared.Helpers
             }
             return Encoding.UTF8.GetString(decrypted, 0, decryptedByteCount);
         }
+   
     }
 }

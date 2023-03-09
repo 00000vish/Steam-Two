@@ -22,7 +22,8 @@ namespace SteamTwo.App.ViewModels
         public void SetKeyMethod()
         {
             SetMasterKey?.Invoke();
-            AccountManager.LoadAccounts(MasterKey);
+            Encryptor.SetMasterKey(MasterKey);
+            AccountManager.LoadAccounts();
             OpenMainWindow?.Invoke();
         }
     }
