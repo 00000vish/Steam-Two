@@ -48,7 +48,8 @@
             <Grid Grid.Row="1">
                 <Button VerticalAlignment="Bottom"
                         HorizontalAlignment="Right"
-                        Margin="7">
+                        Margin="7"
+                        Command="{Binding AddAccountCommand}">
                     <StackPanel Orientation="Horizontal">
                         <iconPacks:PackIconMaterial Kind="Plus"
                                                     VerticalAlignment="Center"/>
