@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using SteamTwo.App.ViewModels;
+using SteamTwo.Shared.Infrastructure;
 using System.Windows;
 
 namespace SteamTwo.App.Windows
@@ -12,6 +13,14 @@ namespace SteamTwo.App.Windows
         public MasterKeyView()
         {
             InitializeComponent();
+
+            if (!SteamTwoSettings.MasterKeyEnabled)
+            {
+                MainWindowView vw = new();
+                vw.Show();
+                this.Close();
+                return;
+            }
             this.DataContext = new MasterKeyViewModel();
         }
 
