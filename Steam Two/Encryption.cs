@@ -14,8 +14,8 @@ namespace SteamTwo
         private static int _keySize = 256;
 
         private static string _hash = "SHA1";
-        private static string _salt = "qyotvsvbitb1fh70"; // Random
-        private static string _vector = "wgcsg7si5sbspunf"; // Random
+        private static string _salt = "2J9dYFLcfX2dH4j9"; // Random
+        private static string _vector = "EeFSKS4673UxoZvm"; // Random
 
         #endregion
 

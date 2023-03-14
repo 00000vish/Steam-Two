@@ -14,8 +14,8 @@ namespace SteamTwo.Shared.Helpers
         private static readonly int _keySize = 256;
 
         private static readonly string _hash = "SHA1";
-        private static readonly string _salt = "TKB5ZxYXYrbBWQ";
-        private static readonly string _vector = "L2v77knCVjvgZQ";
+        private static readonly string _salt = "qyotvsvbitb1fh70";
+        private static readonly string _vector = "wgcsg7si5sbspunf";
 
         public static void SetMasterKey(string masterKey)
         {

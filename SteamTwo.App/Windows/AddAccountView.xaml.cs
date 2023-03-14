@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using SteamTwo.App.ViewModels;
 
 namespace SteamTwo.App.Windows
@@ -11,7 +12,13 @@ namespace SteamTwo.App.Windows
         public AddAccountView()
         {
             InitializeComponent();
-            this.DataContext = new AddAccountViewModel();
+            var viewModel = new AddAccountViewModel();
+            viewModel.Close = () => this.Close();
+            viewModel.SetPassword = () =>
+            {
+                viewModel.Password = this.ThePasswordBox.Password;
+            };
+            this.DataContext = viewModel;
         }
     }
 }

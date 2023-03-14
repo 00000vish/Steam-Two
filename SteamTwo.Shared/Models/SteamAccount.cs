@@ -10,7 +10,7 @@ namespace SteamTwo.Shared.Models
         [JsonProperty]
         public string PasswordEncrypted { get; }
 
-        private SteamAccount(string username, string password)
+        public SteamAccount(string username, string password)
         {
             Username = username;
             PasswordEncrypted = Encryptor.Encrypt(password);
