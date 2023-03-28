@@ -27,7 +27,8 @@ namespace SteamTwo.App.ViewModels
         public void Save()
         {
             SetPassword?.Invoke();
-            AccountManager.AddAccount(new SteamAccount(Username, Password));
+            AccountManager.Add(new SteamAccount(Username, Password));
+            AccountManager.Save();
             Close?.Invoke();
         }
 

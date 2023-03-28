@@ -23,7 +23,7 @@ namespace SteamTwo.App.ViewModels
         {
             SetMasterKey?.Invoke();
             Encryptor.SetMasterKey(MasterKey);
-            AccountManager.LoadAccounts();
+            AccountManager.Load();
             OpenMainWindow?.Invoke();
         }
     }
