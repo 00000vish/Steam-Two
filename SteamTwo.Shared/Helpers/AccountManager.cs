@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using SteamTwo.Shared.Models;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 
@@ -11,9 +10,10 @@ namespace SteamTwo.Shared.Helpers
 {
     public static class AccountManager
     {
-        public static readonly ReadOnlyObservableCollection<SteamAccount> Accounts => _accounts;
+        private static readonly SourceList<SteamAccount> _accounts = new SourceList<SteamAccount>();
         private static string _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".accounts");
-        private static SourceList<SteamAccount> _accounts = new();
+        
+        public static IObservable<IChangeSet<SteamAccount>> Connect() => _accounts.Connect();
 
         public static void Load()
         {
