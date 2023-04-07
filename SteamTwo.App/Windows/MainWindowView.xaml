@@ -10,10 +10,15 @@
                   Title="SteamTwo" TitleCharacterCasing="Normal" ShowMaxRestoreButton="False" Topmost="True"
                   MaxHeight="470" MaxWidth="320" 
                   MinHeight="470" MinWidth="320"
-                  ShowIconOnTitleBar="True" Icon="./../SteamTwo.ico"> 
+                  ShowIconOnTitleBar="True" Icon="./../SteamTwo.ico">
 
     <mah:MetroWindow.Resources>
-        <ResourceDictionary Source="pack://application:,,,/SteamTwo.Shared;component/Resources/SharedDictionary.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/SteamTwo.Shared;component/Resources/SharedDictionary.xaml"/>
+                <ResourceDictionary Source="../Resources/SharedDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </mah:MetroWindow.Resources>
 
     <mah:MetroWindow.RightWindowCommands>
@@ -25,6 +30,7 @@
             </Button>
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
+
     <Grid Margin="10">
         <Grid>
             <Grid.RowDefinitions>
@@ -46,6 +52,9 @@
                        FontSize="{StaticResource Header}"/>
             </Grid>
             <Grid Grid.Row="1">
+                <ListView ItemsSource="{Binding SteamAccounts}"
+                          ItemTemplate="{StaticResource SteamAccountTemplate}"
+                          Margin="1"/>
                 <Button VerticalAlignment="Bottom"
                         HorizontalAlignment="Right"
                         Margin="7"
@@ -101,4 +110,5 @@
             </Grid>
         </Grid>
     </Grid>
+
 </mah:MetroWindow>

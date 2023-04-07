@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks">
+
+    <DataTemplate x:Key="SteamAccountTemplate">
+        <Grid x:Name="ParentContainer">
+            <Grid.Background>
+                <SolidColorBrush Color="Transparent"/>
+            </Grid.Background>
+            <Label Content="{Binding Username}" 
+                       HorizontalAlignment="Left"/>
+            <StackPanel 
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=ParentContainer}" Value="True" >
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=ParentContainer}" Value="False" >
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <Button Command="{Binding CopyUsernameCommand}">
+                    <iconPacks:PackIconMaterial Kind="AccountBoxOutline"/>
+                </Button>
+                <Button Command="{Binding CopyPasswordCommand}">
+                    <iconPacks:PackIconMaterial Kind="Key"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>
